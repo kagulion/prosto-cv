@@ -13,4 +13,36 @@ export const resumeData = {
     'Инженер-программист с 7+ годами опыта в коммерческой Frontend-разработке. Специализируюсь на создании высокопроизводительных SPA/SSG приложений, архитектуре клиентской части и минималистичном инструментарии.',
     'Приверженец подхода «Clean Code & Zero Overengineering» — предпочитаю предсказуемый и легкий код сложным абстракциям.',
   ],
+  experience: [
+    {
+      company: 'FinTech Solution Studio',
+      role: 'Senior Frontend Developer / UI Architect',
+      period: '2025–настоящее время',
+      tags: ['AI', 'React', 'Next.js', 'TypeScript', 'AdonisJS'],
+      highlights: [
+        'Проектирование и разработка клиентской части высоконагруженного аналитического дашборда.',
+        'Перевод ключевых интерфейсных модулей на Svelte 5 (Runes) и Vite.',
+      ],
+    },
+    {
+      company: 'EPAM Systems',
+      role: 'Middle Frontend Developer',
+      period: '2021–2025',
+      tags: ['React', 'Next.js', 'TypeScript', 'Node.js'],
+      highlights: [
+        'Разработка клиентских сервисов для международного E-commerce клиента.',
+        'Оптимизация производительности DOM-дерева и бандлов.',
+      ],
+    },
+  ],
+  skills: [
+    'React/Next.js',
+    'TypeScript',
+    'Node.js',
+    'AI/LLMs',
+    'Tailwind CSS',
+    'Design Systems',
+    'WebRTC',
+    'WebSockets',
+  ],
 }
