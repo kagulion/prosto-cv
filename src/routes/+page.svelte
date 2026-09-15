@@ -1,5 +1,6 @@
 <script>
-  import { resumeData } from "$lib/assets/data";
+  let { data } = $props();
+  let resumeData = $derived(data.resume);
 
   import Header from "$lib/components/Header.svelte";
   import Badge from "$lib/components/Badge.svelte";
@@ -26,8 +27,16 @@
 </script>
 
 <main class="max-w-2xl mx-auto py-10 px-4 sm:px-6 font-sans text-neutral-900">
+  <!-- Кнопка печати -->
+  <div class="flex justify-end mb-6 print:hidden">
+    <button
+      type="button"
+      onclick={() => window.print()}
+      class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-neutral-300 bg-white text-neutral-700 hover:bg-neutral-50 shadow-sm cursor-pointer">🖨️ Экспорт в PDF / Печать</button>
+  </div>
   <!-- Шапка -->
   <Header {...resumeData} />
+
   <!-- Обо мне -->
   <Section title="Обо мне">
     <div class="space-y-3 text-sm text-neutral-600 leading-relaxed">
@@ -36,7 +45,8 @@
       {/each}
     </div>
   </Section>
-  <!-- Навыки (кликабельные бейджи) -->
+
+  <!-- Навыки -->
   <Section title="Навыки">
     <div class="flex flex-wrap gap-1.5 items-center">
       {#each resumeData.skills as skill (skill)}
@@ -48,7 +58,8 @@
           <Badge label={skill} active={selectedTag === skill} />
         </button>
       {/each}
-      <!-- Кнопка сброса, если фильтр включен -->
+
+      <!-- Кнопка сброса -->
       {#if selectedTag}
         <button
           onclick={() => (selectedTag = null)}
@@ -59,7 +70,7 @@
       {/if}
     </div>
   </Section>
-  <!-- Опыт работы (выводим отфильтрованный список) -->
+  <!-- Опыт работы -->
   <Section title="Опыт работы">
     {#if filteredExperience.length === 0}
       <p class="text-xs text-neutral-400 italic">
@@ -71,7 +82,7 @@
       {/each}
     {/if}
   </Section>
-  <!-- Пет-проекты (сетка из 3 колонок) -->
+  <!-- Пет-проекты -->
   <Section title="Пет-проекты">
     {#if filteredProjects.length === 0}
       <p class="text-xs text-neutral-400 italic">
