@@ -45,4 +45,22 @@ export const resumeData = {
     'WebRTC',
     'WebSockets',
   ],
+  projects: [
+    {
+      title: 'Monitor',
+      description: 'Автономный ИИ-агент для контроля качества веб-приложений',
+      tags: ['TypeScript', 'Next.js', 'AI', 'Browser Extension'],
+    },
+    {
+      title: 'Framerz',
+      description: 'Студия по созданию изображений и видео с ИИ',
+      tags: ['TypeScript', 'Next.js', 'AI', 'Browser Extension'],
+    },
+    {
+      title: 'InstaCV',
+      description:
+        'Шаблон резюме с открытым исходным кодом, оптимизированный для печати',
+      tags: ['TypeScript', 'Next.js', 'AI', 'Browser Extension'],
+    },
+  ],
 }
