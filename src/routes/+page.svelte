@@ -2,6 +2,8 @@
   let { data } = $props();
   let resumeData = $derived(data.resume);
 
+  import { Globe, MapPin, Mail, Smartphone } from "@lucide/svelte/icons";
+
   import Header from "$lib/components/Header.svelte";
   import Badge from "$lib/components/Badge.svelte";
   import Section from "$lib/components/Section.svelte";
@@ -32,10 +34,17 @@
     <button
       type="button"
       onclick={() => window.print()}
-      class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-neutral-300 bg-white text-neutral-700 hover:bg-neutral-50 shadow-sm cursor-pointer">🖨️ Экспорт в PDF / Печать</button>
+      class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-neutral-300 bg-white text-neutral-700 hover:bg-neutral-50 shadow-sm cursor-pointer"
+      >🖨️ Экспорт в PDF / Печать</button
+    >
   </div>
+
   <!-- Шапка -->
   <Header {...resumeData} />
+  <Globe />
+  <MapPin />
+  <Mail />
+  <Smartphone />
 
   <!-- Обо мне -->
   <Section title="Обо мне">
