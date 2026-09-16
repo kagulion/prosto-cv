@@ -3,40 +3,42 @@
   import Telegram from "$lib/components/icons/Telegram.svelte";
   import { Globe, MapPin, Mail, Smartphone } from "@lucide/svelte/icons";
 
-  let { name, title, location, contacts } = $props();
+  let { avatar, name, title, location, contacts } = $props();
 </script>
 
 <header class="flex justify-between items-start gap-4 mb-8">
   <!-- Имя, фамилия, профессия, город -->
-  <div class="space-y-1.5">
-    <h1 class="text-3xl font-bold text-zinc-900 tracking-tight">{name}</h1>
-    <p class="text-sm font-medium text-zinc-700 font-mono">{title}</p>
-    <p class="text-xs text-zinc-500 flex items-center gap-1">
-      <span><MapPin size={14}/></span>
+  <div>
+    <h1 class="text-3xl font-bold text-zinc-950 pb-0.5">{name}</h1>
+    <p class="text-base font-semibold leading-6 text-zinc-950 pb-1">{title}</p>
+    <p
+      class="text-xs font-normal text-zinc-900 flex items-center gap-1.5 pb-3.5"
+    >
+      <span><MapPin size={14} /></span>
       {location}
     </p>
 
     <!-- Кнопки контактов -->
-    <div class="flex items-center gap-1.5 pt-2">
+    <div class="flex items-center gap-1.5">
       {#if contacts.website}
         <a
           href={contacts.website}
           class="p-1.75 rounded-md border border-zinc-300 text-zinc-600 hover:bg-zinc-50"
-          title="Вебсайт"><Globe size={16}/></a
+          title="Вебсайт"><Globe size={16} /></a
         >
       {/if}
       {#if contacts.email}
         <a
           href={"mailto:" + contacts.email}
           class="p-1.75 rounded-md border border-zinc-300 text-zinc-600 hover:bg-zinc-50"
-          title="Email"><Mail size={16}/></a
+          title="Email"><Mail size={16} /></a
         >
       {/if}
       {#if contacts.phone}
         <a
           href={"tel:" + contacts.phone}
           class="p-1.75 rounded-md border border-zinc-300 text-zinc-600 hover:bg-zinc-50"
-          title="Телефон"><Smartphone size={16}/></a
+          title="Телефон"><Smartphone size={16} /></a
         >
       {/if}
       {#if contacts.github}
@@ -60,10 +62,18 @@
     </div>
   </div>
 
-  <!-- Аватар / Заглушка -->
-  <div
-    class="w-24 h-28 bg-zinc-100 rounded-xl flex items-center justify-center border border-zinc-300 text-zinc-400 text-3xl shrink-0"
-  >
-    👤
-  </div>
+  <!-- Аватар -->
+  {#if avatar}
+    <img
+      src={avatar}
+      alt={name}
+      class="w-26 h-26 bg-zinc-100 rounded-2xl shrink-0 object-cover"
+    />
+  {:else}
+    <div
+      class="w-26 h-26 bg-neutral-100 rounded-2xl flex items-center justify-center border border-neutral-200 text-neutral-400 text-2xl shrink-0"
+    >
+      👤
+    </div>
+  {/if}
 </header>

@@ -1,4 +1,9 @@
+import avatarImg from '$lib/assets/avatar.png'
+import faviconImg from '$lib/assets/favicon.svg'
+
 export const resumeData = {
+  avatar: avatarImg,
+  favicon: faviconImg,
   name: 'Матеуш Роньский',
   title: 'Senior Frontend Developer / Инженер-программист',
   location: 'Санкт-Петербург, Россия',
