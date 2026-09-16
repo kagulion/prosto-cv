@@ -2,8 +2,6 @@
   let { data } = $props();
   let resumeData = $derived(data.resume);
 
-  import { Globe, MapPin, Mail, Smartphone } from "@lucide/svelte/icons";
-
   import Header from "$lib/components/Header.svelte";
   import Badge from "$lib/components/Badge.svelte";
   import Section from "$lib/components/Section.svelte";
@@ -41,10 +39,6 @@
 
   <!-- Шапка -->
   <Header {...resumeData} />
-  <Globe />
-  <MapPin />
-  <Mail />
-  <Smartphone />
 
   <!-- Обо мне -->
   <Section title="Обо мне">
