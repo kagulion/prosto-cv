@@ -3,7 +3,7 @@
 </script>
 
 <section class="mb-8">
-  <h2 class="text-xl font-bold text-neutral-900 mb-3 tracking-tight">{title}</h2>
+  <h2 class="mb-3 text-xl font-bold tracking-tight text-neutral-900">{title}</h2>
 
   {@render children?.()}
 </section>

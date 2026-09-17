@@ -1,28 +1,26 @@
 <script>
-  import Badge from "$lib/components/Badge.svelte";
+  import Badge from '$lib/components/Badge.svelte';
 
   let { company, role, period, tags = [], highlights = [] } = $props();
 </script>
 
 <div class="mb-6 last:mb-0">
-  <div class="flex justify-between items-baseline mb-0.5">
-    <h3 class="font-bold text-neutral-900 text-base">{company}</h3>
-    <span class="text-xs text-neutral-500 font-mono">{period}</span>
+  <div class="mb-0.5 flex items-baseline justify-between">
+    <h3 class="text-base font-bold text-neutral-900">{company}</h3>
+    <span class="font-mono text-xs text-neutral-500">{period}</span>
   </div>
 
-  <p class="text-sm font-medium text-neutral-700 font-mono mb-2">{role}</p>
+  <p class="mb-2 font-mono text-sm font-medium text-neutral-700">{role}</p>
 
   {#if tags.length > 0}
-    <div class="flex flex-wrap gap-1.5 mb-2.5">
+    <div class="mb-2.5 flex flex-wrap gap-1.5">
       {#each tags as tag (tag)}
         <Badge label={tag} />
       {/each}
     </div>
   {/if}
 
-  <ul
-    class="list-disc list-outside pl-4 space-y-1 text-xs text-neutral-600 leading-relaxed"
-  >
+  <ul class="list-outside list-disc space-y-1 pl-4 text-xs leading-relaxed text-neutral-600">
     {#each highlights as item (item)}
       <li>{item}</li>
     {/each}

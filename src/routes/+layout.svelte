@@ -1,5 +1,5 @@
 <script>
-  import "./layout.css";
+  import './layout.css';
   let { children, data } = $props();
   let resumeData = $derived(data?.resume);
 </script>
