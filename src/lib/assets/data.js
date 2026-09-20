@@ -54,17 +54,20 @@ export const resumeData = {
     {
       title: 'Monitor',
       description: 'Автономный ИИ-агент для контроля качества веб-приложений',
-      tags: ['TypeScript', 'Next.js', 'AI', 'Browser Extension']
+      tags: ['TypeScript', 'Next.js', 'AI', 'Browser Extension'],
+      url: 'https://example.com'
     },
     {
       title: 'Framerz',
       description: 'Студия по созданию изображений и видео с ИИ',
-      tags: ['TypeScript', 'Next.js', 'AI', 'Browser Extension']
+      tags: ['TypeScript', 'Next.js', 'AI', 'Browser Extension'],
+      url: 'https://example.com'
     },
     {
       title: 'InstaCV',
       description: 'Шаблон резюме с открытым исходным кодом, оптимизированный для печати',
-      tags: ['TypeScript', 'Next.js', 'AI', 'Browser Extension']
+      tags: ['TypeScript', 'Next.js', 'AI', 'Browser Extension'],
+      url: 'https://example.com'
     }
   ]
 };
