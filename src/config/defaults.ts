@@ -1,0 +1,35 @@
+import type { LabelKey } from './sections';
+
+export type DefaultLabel = {
+  readonly title: string;
+  /** Короткое имя для меню. Нет значения, значит в меню идёт `title`. */
+  readonly nav?: string;
+};
+
+export type DefaultLabels = {
+  readonly sections: Readonly<Record<LabelKey, DefaultLabel>>;
+  readonly pdfButton: string;
+};
+
+/** Единственное место с русским текстом интерфейса, автор переопределяет его в `labels`. */
+export const DEFAULT_LABELS: DefaultLabels = {
+  sections: {
+    contacts: { title: 'Контакты' },
+    about: { title: 'О себе' },
+    experience: { title: 'Опыт работы', nav: 'Опыт' },
+    projects: { title: 'Проекты' },
+    skills: { title: 'Навыки' },
+    education: { title: 'Образование' },
+    certificates: { title: 'Сертификаты и курсы', nav: 'Сертификаты' },
+    achievements: { title: 'Достижения и награды', nav: 'Достижения' },
+    publications: { title: 'Публикации и выступления', nav: 'Публикации' },
+    openSource: { title: 'Open source' },
+    languages: { title: 'Языки' },
+    tools: { title: 'Инструменты и технологии', nav: 'Инструменты' },
+    volunteering: { title: 'Волонтёрство' },
+    interests: { title: 'Интересы и хобби', nav: 'Интересы' },
+    recommendations: { title: 'Рекомендации' },
+    availability: { title: 'Доступность' }
+  },
+  pdfButton: 'Скачать резюме (PDF)'
+};
