@@ -108,6 +108,9 @@ const labels = strictObject({
   skipLink: optionalText
 }).optional();
 
+/** Фото в шапке: файл из `src/assets` и обязательное описание для читалки с экрана. */
+const photo = strictObject({ src: required, alt: required }).optional();
+
 const footer = strictObject({ show: z.boolean().default(true), credit: optionalText }).default({
   show: true
 });
@@ -118,6 +121,7 @@ export const cvSchema = strictObject({
     .default('ru'),
   name: required,
   position: required,
+  photo,
   contacts,
   ...sectionSchemas,
   labels,

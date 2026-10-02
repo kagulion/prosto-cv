@@ -5,6 +5,8 @@ export default defineCV({
   name: 'Иван Иванов',
   position: 'Фронтенд-разработчик (Middle)',
 
+  photo: { src: 'photo-example.jpg', alt: 'Портрет Ивана Иванова' },
+
   contacts: {
     phone: '+7 999 999-99-99',
     email: 'devivanov@mail.ru',

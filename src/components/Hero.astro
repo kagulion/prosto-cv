@@ -1,6 +1,7 @@
 ---
 import type { ContactItem } from '../lib/contact-links';
 import { CONTACTS_ID } from '../lib/page-sections';
+import type { PhotoView } from '../lib/photo';
 import PrintButton from './PrintButton.astro';
 
 interface Props {
@@ -8,17 +9,33 @@ interface Props {
   readonly position: string;
   readonly contactsTitle: string;
   readonly contacts: readonly ContactItem[];
+  /** Фото справа от имени. Нет значения, значит нет ни картинки, ни заглушки. */
+  readonly photo?: PhotoView;
   /** Подпись кнопки печати. Нет значения, значит кнопки и скрипта нет. */
   readonly printLabel?: string;
 }
 
-const { name, position, contactsTitle, contacts, printLabel } = Astro.props;
+const { name, position, contactsTitle, contacts, photo, printLabel } = Astro.props;
 const titleId = `${CONTACTS_ID}-title`;
 ---
 
 <header class="py-12 sm:py-16 print:py-4">
-  <h1 class="text-4xl font-bold tracking-tight">{name}</h1>
-  <p class="text-muted-foreground mt-2 font-mono text-sm">{position}</p>
+  <div class="flex items-start justify-between gap-4 sm:gap-6">
+    <div class="min-w-0">
+      <h1 class="text-4xl font-bold tracking-tight">{name}</h1>
+      <p class="text-muted-foreground mt-2 font-mono text-sm">{position}</p>
+    </div>
+    {photo !== undefined && (
+      <img
+        src={photo.src}
+        width={photo.width}
+        height={photo.height}
+        alt={photo.alt}
+        loading="eager"
+        class="size-16 shrink-0 rounded-lg object-cover sm:size-24"
+      />
+    )}
+  </div>
   <section id={CONTACTS_ID} aria-labelledby={titleId} class="mt-6">
     <h2 id={titleId} class="sr-only">
       {contactsTitle}

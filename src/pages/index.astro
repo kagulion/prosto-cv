@@ -1,14 +1,18 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import Nav from '../components/Nav.astro';
 import Section from '../components/Section.astro';
-import { loadConfig, resolveLabels } from '../config';
+import { ConfigError, loadConfig, resolveLabels } from '../config';
+import { CONFIG_FILE } from '../config/load';
 import Layout from '../layouts/Layout.astro';
 import { buildContactLinks } from '../lib/contact-links';
 import { buildFooter } from '../lib/footer';
 import { buildNavItems } from '../lib/nav-items';
 import { buildSections } from '../lib/page-sections';
+import { PHOTO_OPTIONS, resolvePhoto, type PhotoView } from '../lib/photo';
 import { SECTION_REGISTRY } from '../sections/registry';
 
 const cv = loadConfig();
@@ -16,6 +20,26 @@ const labels = resolveLabels(cv);
 const sections = buildSections(cv, labels, SECTION_REGISTRY);
 const navItems = buildNavItems(sections, labels);
 const contacts = buildContactLinks(cv.contacts);
+// Край: Vite собирает карту картинок из `src/assets`, `getImage` оптимизирует фото на сборке.
+const photoAssets = import.meta.glob<{ readonly default: ImageMetadata }>(
+  '/src/assets/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}',
+  { eager: true }
+);
+const photoResolution = cv.photo === undefined ? undefined : resolvePhoto(cv.photo, photoAssets);
+if (photoResolution?.ok === false) throw new ConfigError(CONFIG_FILE, [photoResolution.issue]);
+const optimized =
+  photoResolution === undefined
+    ? undefined
+    : await getImage({ src: photoResolution.image, ...PHOTO_OPTIONS });
+const photo: PhotoView | undefined =
+  photoResolution === undefined || optimized === undefined
+    ? undefined
+    : {
+        src: optimized.src,
+        width: Number(optimized.attributes.width),
+        height: Number(optimized.attributes.height),
+        alt: photoResolution.alt
+      };
 // Единственный побочный эффект страницы: год сборки читается здесь, дальше он аргумент.
 const footer = buildFooter({
   name: cv.name,
@@ -38,6 +62,7 @@ const footer = buildFooter({
     position={cv.position}
     contactsTitle={labels.sections.contacts.title}
     contacts={contacts}
+    photo={photo}
     printLabel={labels.pdfButton ?? undefined}
   />
   {navItems.length > 0 && <Nav items={navItems} />}
