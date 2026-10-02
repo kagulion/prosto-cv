@@ -88,10 +88,13 @@ const sectionLabel = strictObject({ title: optionalText, nav: optionalText }).op
 
 const labels = strictObject({
   sections: strictObject(mapSectionKeys(() => sectionLabel)).optional(),
-  pdfButton: optionalText
+  pdfButton: optionalText,
+  skipLink: optionalText
 }).optional();
 
-const footer = strictObject({ show: z.boolean().default(true) }).default({ show: true });
+const footer = strictObject({ show: z.boolean().default(true), credit: optionalText }).default({
+  show: true
+});
 
 export const cvSchema = strictObject({
   lang: text

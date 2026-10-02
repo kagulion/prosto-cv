@@ -1,0 +1,27 @@
+---
+import type { Cv } from '../config';
+
+interface Props {
+  readonly cv: Cv;
+}
+
+const { cv } = Astro.props;
+const places = cv.experience ?? [];
+---
+
+<ul class="space-y-6">
+  {places.map(({ position, company, period, bullets }) => (
+    <li>
+      <h3 class="font-semibold">{position}</h3>
+      <p>{company}</p>
+      <p class="text-muted-foreground">{period}</p>
+      {bullets !== undefined && bullets.length > 0 && (
+        <ul class="mt-2 list-disc space-y-1 pl-5">
+          {bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      )}
+    </li>
+  ))}
+</ul>

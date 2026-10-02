@@ -57,6 +57,7 @@ export default defineCV({
     },
     {
       name: 'Генератор CV',
+      url: 'https://example.com/prosto-cv',
       description: 'одностраничный сайт-резюме из конфига',
       tech: ['Astro', 'TypeScript', 'Tailwind']
     }

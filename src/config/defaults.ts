@@ -9,6 +9,8 @@ export type DefaultLabel = {
 export type DefaultLabels = {
   readonly sections: Readonly<Record<LabelKey, DefaultLabel>>;
   readonly pdfButton: string;
+  readonly skipLink: string;
+  readonly footerCredit: string;
 };
 
 /** Единственное место с русским текстом интерфейса, автор переопределяет его в `labels`. */
@@ -31,5 +33,7 @@ export const DEFAULT_LABELS: DefaultLabels = {
     recommendations: { title: 'Рекомендации' },
     availability: { title: 'Доступность' }
   },
-  pdfButton: 'Скачать резюме (PDF)'
+  pdfButton: 'Скачать резюме (PDF)',
+  skipLink: 'Перейти к содержимому',
+  footerCredit: 'Prosto CV'
 };

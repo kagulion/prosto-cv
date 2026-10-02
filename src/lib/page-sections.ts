@@ -9,6 +9,9 @@ export type SectionEntry<C> = {
   readonly component: C;
 };
 
+/** Якорь блока контактов в шапке, на него ведёт меню. */
+export const CONTACTS_ID = 'contacts';
+
 /** Якорь секции: ключ в kebab case (`openSource` даёт `open-source`). */
 export const anchorId = (key: SectionKey): string =>
   key.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);

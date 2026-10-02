@@ -1,5 +1,9 @@
 import type { SectionKey } from '../config';
 import About from './About.astro';
+import Education from './Education.astro';
+import Experience from './Experience.astro';
+import Projects from './Projects.astro';
+import Skills from './Skills.astro';
 
 export type SectionComponent = typeof About;
 
@@ -9,10 +13,10 @@ export type SectionComponent = typeof About;
  */
 export const SECTION_REGISTRY: Readonly<Record<SectionKey, SectionComponent | null>> = {
   about: About,
-  experience: null,
-  projects: null,
-  skills: null,
-  education: null,
+  experience: Experience,
+  projects: Projects,
+  skills: Skills,
+  education: Education,
   certificates: null,
   achievements: null,
   publications: null,

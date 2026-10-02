@@ -1,20 +1,45 @@
 ---
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import Nav from '../components/Nav.astro';
 import Section from '../components/Section.astro';
 import { loadConfig, resolveLabels } from '../config';
 import Layout from '../layouts/Layout.astro';
+import { buildContactLinks } from '../lib/contact-links';
+import { buildFooter } from '../lib/footer';
+import { buildNavItems } from '../lib/nav-items';
 import { buildSections } from '../lib/page-sections';
 import { SECTION_REGISTRY } from '../sections/registry';
 
 const cv = loadConfig();
-const sections = buildSections(cv, resolveLabels(cv), SECTION_REGISTRY);
+const labels = resolveLabels(cv);
+const sections = buildSections(cv, labels, SECTION_REGISTRY);
+const navItems = buildNavItems(sections, labels);
+const contacts = buildContactLinks(cv.contacts);
+// Единственный побочный эффект страницы: год сборки читается здесь, дальше он аргумент.
+const footer = buildFooter({
+  name: cv.name,
+  year: new Date().getFullYear(),
+  credit: labels.footerCredit
+});
 ---
 
 <Layout lang={cv.lang} title={cv.name}>
-  {/* Временная шапка: её заменит фича 3. */}
-  <header class="py-12 sm:py-16">
-    <h1 class="text-4xl font-bold tracking-tight">{cv.name}</h1>
-    <p class="text-muted-foreground mt-2 font-mono text-sm">{cv.position}</p>
-  </header>
+  {navItems.length > 0 && (
+    <a
+      href="#main"
+      class="link bg-background sr-only focus:not-sr-only focus:block focus:py-2 print:hidden"
+    >
+      {labels.skipLink}
+    </a>
+  )}
+  <Hero
+    name={cv.name}
+    position={cv.position}
+    contactsTitle={labels.sections.contacts.title}
+    contacts={contacts}
+  />
+  {navItems.length > 0 && <Nav items={navItems} />}
   {sections.length > 0 && (
     <main id="main">
       {sections.map(({ id, title, component: Content }) => (
@@ -24,4 +49,5 @@ const sections = buildSections(cv, resolveLabels(cv), SECTION_REGISTRY);
       ))}
     </main>
   )}
+  {cv.footer.show && <Footer {...footer} />}
 </Layout>

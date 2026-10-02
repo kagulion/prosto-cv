@@ -124,3 +124,12 @@
     @apply bg-background font-sans text-foreground antialiased;
   }
 }
+
+/*
+ * Общий стиль ссылки. Фокус красим в `foreground`, а не в `ring`: полупрозрачный `ring`
+ * на белом не дотягивает до контраста 3:1 (WCAG 1.4.11).
+ */
+@utility link {
+  @apply text-foreground underline underline-offset-4;
+  @apply focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground;
+}
