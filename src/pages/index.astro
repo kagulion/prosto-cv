@@ -1,19 +1,27 @@
 ---
-import '../styles/global.css';
-import { loadConfig } from '../config';
+import Section from '../components/Section.astro';
+import { loadConfig, resolveLabels } from '../config';
+import Layout from '../layouts/Layout.astro';
+import { buildSections } from '../lib/page-sections';
+import { SECTION_REGISTRY } from '../sections/registry';
 
-// Временно: показываем имя и должность из конфига, заглушку заменит фича 2.
 const cv = loadConfig();
+const sections = buildSections(cv, resolveLabels(cv), SECTION_REGISTRY);
 ---
 
-<html lang={cv.lang}>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{cv.name}</title>
-  </head>
-  <body class="flex min-h-screen flex-col items-center justify-center gap-2">
+<Layout lang={cv.lang} title={cv.name}>
+  {/* Временная шапка: её заменит фича 3. */}
+  <header class="py-12 sm:py-16">
     <h1 class="text-4xl font-bold tracking-tight">{cv.name}</h1>
-    <p class="text-muted-foreground font-mono text-sm">{cv.position}</p>
-  </body>
-</html>
+    <p class="text-muted-foreground mt-2 font-mono text-sm">{cv.position}</p>
+  </header>
+  {sections.length > 0 && (
+    <main id="main">
+      {sections.map(({ id, title, component: Content }) => (
+        <Section id={id} title={title}>
+          <Content cv={cv} />
+        </Section>
+      ))}
+    </main>
+  )}
+</Layout>

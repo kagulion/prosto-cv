@@ -1,0 +1,17 @@
+---
+import type { Cv } from '../config';
+import { splitParagraphs } from '../lib/page-sections';
+
+interface Props {
+  readonly cv: Cv;
+}
+
+const { cv } = Astro.props;
+const paragraphs = splitParagraphs(cv.about ?? '');
+---
+
+<div class="text-foreground space-y-4 leading-relaxed">
+  {paragraphs.map((paragraph) => (
+    <p>{paragraph}</p>
+  ))}
+</div>
