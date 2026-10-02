@@ -86,9 +86,25 @@ const sectionSchemas = {
 
 const sectionLabel = strictObject({ title: optionalText, nav: optionalText }).optional();
 
+const pdfButtonMessage = 'ожидалась строка или false';
+
+/** Подпись кнопки печати или `false`, чтобы убрать кнопку. `true` и числа это ошибка. */
+const pdfButton = z
+  .union(
+    [
+      text,
+      z
+        .boolean()
+        .refine((value) => !value, pdfButtonMessage)
+        .transform(() => false as const)
+    ],
+    pdfButtonMessage
+  )
+  .optional();
+
 const labels = strictObject({
   sections: strictObject(mapSectionKeys(() => sectionLabel)).optional(),
-  pdfButton: optionalText,
+  pdfButton,
   skipLink: optionalText
 }).optional();
 

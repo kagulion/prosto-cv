@@ -1,0 +1,14 @@
+---
+import { displayUrl } from '../lib/links';
+
+interface Props {
+  readonly href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a class="link" href={href}>
+  <slot />
+</a>
+<span class="hidden wrap-anywhere print:inline"> ({displayUrl(href)})</span>

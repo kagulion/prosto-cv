@@ -1,19 +1,22 @@
 ---
 import type { ContactItem } from '../lib/contact-links';
 import { CONTACTS_ID } from '../lib/page-sections';
+import PrintButton from './PrintButton.astro';
 
 interface Props {
   readonly name: string;
   readonly position: string;
   readonly contactsTitle: string;
   readonly contacts: readonly ContactItem[];
+  /** Подпись кнопки печати. Нет значения, значит кнопки и скрипта нет. */
+  readonly printLabel?: string;
 }
 
-const { name, position, contactsTitle, contacts } = Astro.props;
+const { name, position, contactsTitle, contacts, printLabel } = Astro.props;
 const titleId = `${CONTACTS_ID}-title`;
 ---
 
-<header class="py-12 sm:py-16">
+<header class="py-12 sm:py-16 print:py-4">
   <h1 class="text-4xl font-bold tracking-tight">{name}</h1>
   <p class="text-muted-foreground mt-2 font-mono text-sm">{position}</p>
   <section id={CONTACTS_ID} aria-labelledby={titleId} class="mt-6">
@@ -34,4 +37,5 @@ const titleId = `${CONTACTS_ID}-title`;
       ))}
     </ul>
   </section>
+  {printLabel !== undefined && <PrintButton label={printLabel} />}
 </header>

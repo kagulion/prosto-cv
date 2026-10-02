@@ -33,7 +33,7 @@ export const DEFAULT_LABELS: DefaultLabels = {
     recommendations: { title: 'Рекомендации' },
     availability: { title: 'Доступность' }
   },
-  pdfButton: 'Скачать резюме (PDF)',
+  pdfButton: 'Сохранить в PDF',
   skipLink: 'Перейти к содержимому',
   footerCredit: 'Prosto CV'
 };

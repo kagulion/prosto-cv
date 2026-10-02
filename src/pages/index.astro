@@ -38,6 +38,7 @@ const footer = buildFooter({
     position={cv.position}
     contactsTitle={labels.sections.contacts.title}
     contacts={contacts}
+    printLabel={labels.pdfButton ?? undefined}
   />
   {navItems.length > 0 && <Nav items={navItems} />}
   {sections.length > 0 && (

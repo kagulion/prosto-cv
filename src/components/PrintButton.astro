@@ -1,0 +1,22 @@
+---
+interface Props {
+  readonly label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="mt-4 print:hidden">
+  <button type="button" hidden data-print-button class="link cursor-pointer">
+    {label}
+  </button>
+</div>
+
+<script>
+  // Единственный клиентский скрипт страницы. Без JS кнопка остаётся скрытой.
+  const button = document.querySelector<HTMLButtonElement>('[data-print-button]');
+  if (button) {
+    button.hidden = false;
+    button.addEventListener('click', () => window.print());
+  }
+</script>

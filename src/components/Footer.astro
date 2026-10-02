@@ -6,7 +6,7 @@ type Props = FooterLines;
 const { copyright, credit } = Astro.props;
 ---
 
-<footer class="border-border border-t py-6">
+<footer class="border-border border-t py-6 print:hidden">
   <p class="text-muted-foreground text-sm">
     <span>{copyright}</span> <span aria-hidden="true">·</span> <span>{credit}</span>
   </p>

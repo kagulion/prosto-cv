@@ -163,8 +163,7 @@ export default defineCV({
   labels: {
     sections: {
       experience: { title: 'Опыт работы', nav: 'Опыт' }
-    },
-    pdfButton: 'Скачать резюме (PDF)'
+    }
   },
 
   footer: { show: true }

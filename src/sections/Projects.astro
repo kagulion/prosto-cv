@@ -1,5 +1,6 @@
 ---
 import type { Cv } from '../config';
+import ExternalLink from '../components/ExternalLink.astro';
 import TagList from '../components/TagList.astro';
 
 interface Props {
@@ -14,13 +15,7 @@ const projects = cv.projects ?? [];
   {projects.map(({ name, url, tag, description, tech }) => (
     <li>
       <h3 class="font-semibold">
-        {url !== undefined ? (
-          <a class="link" href={url}>
-            {name}
-          </a>
-        ) : (
-          name
-        )}
+        {url !== undefined ? <ExternalLink href={url}>{name}</ExternalLink> : name}
       </h3>
       {tag !== undefined && <p class="text-muted-foreground">{tag}</p>}
       {description !== undefined && <p>{description}</p>}

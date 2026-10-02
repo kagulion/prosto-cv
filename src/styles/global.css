@@ -133,3 +133,24 @@
   @apply text-foreground underline underline-offset-4;
   @apply focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground;
 }
+
+/* Печать: резюме на бумаге без экранных отступов. Цвета остаются токенами светлой темы. */
+@page {
+  margin: 15mm;
+}
+
+@media print {
+  html {
+    font-size: 14px;
+  }
+
+  li,
+  figure {
+    break-inside: avoid;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+}

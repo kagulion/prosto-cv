@@ -4,7 +4,8 @@ import { mapSectionKeys, type LabelKey } from './sections';
 
 export type ResolvedLabels = {
   readonly sections: Readonly<Record<LabelKey, { readonly title: string; readonly nav: string }>>;
-  readonly pdfButton: string;
+  /** `null` значит «кнопки нет» (в конфиге `pdfButton: false`). */
+  readonly pdfButton: string | null;
   readonly skipLink: string;
   readonly footerCredit: string;
 };
@@ -22,7 +23,8 @@ export const resolveLabels = (cv: Cv): ResolvedLabels => ({
       nav: custom?.nav ?? custom?.title ?? fallback.nav ?? fallback.title
     };
   }),
-  pdfButton: cv.labels?.pdfButton ?? DEFAULT_LABELS.pdfButton,
+  pdfButton:
+    cv.labels?.pdfButton === false ? null : (cv.labels?.pdfButton ?? DEFAULT_LABELS.pdfButton),
   skipLink: cv.labels?.skipLink ?? DEFAULT_LABELS.skipLink,
   footerCredit: cv.footer.credit ?? DEFAULT_LABELS.footerCredit
 });
