@@ -7,11 +7,18 @@ interface Props {
 }
 
 const { cv } = Astro.props;
-const lines = (cv.languages ?? []).map(languageLine);
+// Название выделяем отдельно, остаток строки («: уровень (пояснение)») берём из той же сборки.
+const lines = (cv.languages ?? []).map((language) => ({
+  name: language.name,
+  rest: languageLine(language).slice(language.name.length)
+}));
 ---
 
-<ul class="space-y-1">
-  {lines.map((line) => (
-    <li>{line}</li>
+<ul class="space-y-1 text-sm">
+  {lines.map(({ name, rest }) => (
+    <li>
+      <span class="font-medium">{name}</span>
+      {rest}
+    </li>
   ))}
 </ul>

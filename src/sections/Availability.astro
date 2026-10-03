@@ -10,7 +10,7 @@ const { cv } = Astro.props;
 const rows = buildAvailabilityRows(cv.availability, resolveLabels(cv).availability);
 ---
 
-<dl class="grid grid-cols-1 gap-x-6 gap-y-1 sm:grid-cols-[auto_minmax(0,1fr)]">
+<dl class="grid text-sm grid-cols-1 gap-x-6 gap-y-1 sm:grid-cols-[auto_minmax(0,1fr)]">
   {rows.map(({ label, value }) => (
     <>
       <dt class="text-muted-foreground wrap-anywhere">{label}</dt>

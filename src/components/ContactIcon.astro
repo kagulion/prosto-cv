@@ -18,10 +18,10 @@ const brand = kind in BRANDS ? BRANDS[kind as keyof typeof BRANDS] : undefined;
 const brandBody = brand === undefined ? undefined : brands.icons[brand].body;
 ---
 
-{Basic !== undefined && <Basic class="size-4" aria-hidden="true" />}
+{Basic !== undefined && <Basic class="size-[18px]" aria-hidden="true" />}
 {brandBody !== undefined && (
   <svg
-    class="size-4"
+    class="size-[18px]"
     viewBox={`0 0 ${brands.width} ${brands.height}`}
     fill="currentColor"
     aria-hidden="true"

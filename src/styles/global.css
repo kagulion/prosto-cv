@@ -6,7 +6,7 @@
 @custom-variant dark (&:is(.dark, .dark *));
 
 :root {
-  --background: oklch(0.985 0.0015 286.375);
+  --background: oklch(0.985 0 0);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -168,7 +168,7 @@
  * текст контакта, поэтому рамка и размер сбрасываются.
  */
 @utility icon-chip {
-  @apply inline-flex h-8 min-w-8 items-center justify-center rounded-md border border-border text-foreground;
+  @apply inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-border text-foreground;
 
   @media print {
     @apply h-auto min-w-0 rounded-none border-0;

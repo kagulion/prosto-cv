@@ -9,9 +9,10 @@ const { items } = Astro.props;
 ---
 
 {items.length > 0 && (
-  <ul class="list-disc space-y-1 pl-5">
+  <ul class="space-y-1">
     {items.map(({ text, url }) => (
-      <li class="wrap-anywhere">
+      <li class="relative pl-5 text-sm wrap-anywhere text-pretty">
+        <span aria-hidden="true" class="bg-muted-foreground absolute top-[0.7em] left-0 h-px w-3" />
         {url !== undefined ? <ExternalLink href={url}>{text}</ExternalLink> : text}
       </li>
     ))}

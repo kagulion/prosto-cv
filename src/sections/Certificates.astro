@@ -1,5 +1,6 @@
 ---
 import type { Cv } from '../config';
+import RowList from '../components/RowList.astro';
 import { joinFilled } from '../lib/text';
 
 interface Props {
@@ -7,17 +8,11 @@ interface Props {
 }
 
 const { cv } = Astro.props;
-const entries = (cv.certificates ?? []).map(({ title, issuer, year }) => ({
+const rows = (cv.certificates ?? []).map(({ title, issuer, year }) => ({
   title,
-  details: joinFilled([issuer, year], ', ')
+  details: joinFilled([issuer], ', '),
+  ...(year === undefined ? {} : { aside: String(year) })
 }));
 ---
 
-<ul class="space-y-6">
-  {entries.map(({ title, details }) => (
-    <li>
-      <h3 class="font-semibold">{title}</h3>
-      {details !== '' && <p class="text-muted-foreground">{details}</p>}
-    </li>
-  ))}
-</ul>
+<RowList rows={rows} />

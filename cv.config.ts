@@ -56,19 +56,19 @@ export default defineCV({
   projects: [
     {
       name: 'Личный кабинет «Техносфера»',
-      description: 'клиентский портал',
+      description: 'Клиентский портал',
       tech: ['React', 'TypeScript', 'Redux Toolkit', 'Tailwind']
     },
     {
       name: 'Трекер задач',
       tag: 'pet-проект',
-      description: 'канбан-доска с drag-and-drop',
+      description: 'Канбан-доска с drag-and-drop',
       tech: ['React', 'Zustand', 'Vite']
     },
     {
       name: 'Генератор CV',
       url: 'https://example.com/prosto-cv',
-      description: 'одностраничный сайт-резюме из конфига',
+      description: 'Одностраничный сайт-резюме из конфига',
       tech: ['Astro', 'TypeScript', 'Tailwind']
     }
   ],
@@ -180,7 +180,7 @@ export default defineCV({
     sections: {
       experience: { title: 'Опыт работы', nav: 'Опыт' }
     },
-    pdfButton: 'Скачать резюме' // false убирает кнопку
+    pdfButton: 'PDF' // false убирает кнопку
   },
 
   footer: { show: true }

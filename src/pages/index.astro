@@ -75,7 +75,7 @@ const footer = buildFooter({
     printLabel={labels.pdfButton ?? undefined}
   />
   {sections.length > 0 && (
-    <main id="main" class="relative">
+    <main id="main" class="relative mt-8 print:mt-0">
       {navItems.length > 0 && <Nav items={navItems} />}
       {sections.map(({ id, title, component: Content }) => (
         <Section id={id} title={title}>

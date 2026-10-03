@@ -14,13 +14,16 @@ const { items } = Astro.props;
   Правый край `main` отстоит от края колонки на 1.5rem (`sm:px-6`): зазор 6rem до колонки даёт `ml-30`.
   Влезает с `xl`, ниже скрыто.
 -->
-<nav data-nav class="absolute inset-y-0 left-full ml-30 hidden w-44 pt-14 xl:block print:hidden">
-  <div class="sticky top-16">
-    <ul class="border-border flex flex-col gap-y-0 border-l">
+<nav
+  data-nav
+  class="absolute inset-y-0 left-full ml-30 hidden w-44 pt-[86px] xl:block print:hidden"
+>
+  <div class="sticky top-[94px]">
+    <ul class="group/list border-border flex flex-col gap-y-0 border-l">
       {items.map(({ id, label }) => (
         <li class="min-w-0 wrap-anywhere">
           <a
-            class="text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground focus-visible:outline-foreground inline-block rounded-sm py-1 pl-4 text-sm transition-colors duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2"
+            class="text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground focus-visible:outline-foreground inline-block rounded-sm py-1 pl-4 text-[13px] transition-[color,opacity] duration-150 group-hover/list:opacity-50 hover:opacity-100! ease-out focus-visible:outline-2 focus-visible:outline-offset-2"
             href={`#${id}`}
           >
             {label}

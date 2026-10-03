@@ -1,7 +1,8 @@
 ---
 import type { Cv } from '../config';
-import ExternalLink from '../components/ExternalLink.astro';
+import ArrowUpRight from '@lucide/astro/icons/arrow-up-right';
 import TagList from '../components/TagList.astro';
+import { displayUrl } from '../lib/links';
 
 interface Props {
   readonly cv: Cv;
@@ -11,15 +12,28 @@ const { cv } = Astro.props;
 const projects = cv.projects ?? [];
 ---
 
-<ul class="space-y-6">
-  {projects.map(({ name, url, tag, description, tech }) => (
-    <li>
-      <h3 class="font-semibold">
-        {url !== undefined ? <ExternalLink href={url}>{name}</ExternalLink> : name}
+<ul class="grid grid-cols-1 gap-3 sm:grid-cols-3 print:grid-cols-3">
+  {projects.map(({ name, url, description, tech }) => (
+    <li class="has-[a:focus-visible]:outline-foreground relative flex min-w-0 flex-col rounded-lg border p-4 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2">
+      <h3 class="flex items-start justify-between gap-2 text-base leading-snug font-medium tracking-tight">
+        {url !== undefined ? (
+          <>
+            <a href={url} class="outline-none after:absolute after:inset-0 after:rounded-lg">
+              {name}
+            </a>
+            <ArrowUpRight class="size-4 shrink-0 print:hidden" aria-hidden="true" />
+            <span class="hidden wrap-anywhere print:inline"> ({displayUrl(url)})</span>
+          </>
+        ) : (
+          name
+        )}
       </h3>
-      {tag !== undefined && <p class="text-muted-foreground">{tag}</p>}
-      {description !== undefined && <p>{description}</p>}
-      <TagList items={tech ?? []} />
+      {description !== undefined && (
+        <p class="text-muted-foreground mt-0.5 text-[13px] leading-snug">{description}</p>
+      )}
+      <div class="mt-auto pt-3">
+        <TagList items={tech ?? []} />
+      </div>
     </li>
   ))}
 </ul>

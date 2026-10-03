@@ -1,4 +1,5 @@
 ---
+import logotype from '../assets/logotype.svg';
 import type { FooterLines } from '../lib/footer';
 
 type Props = FooterLines;
@@ -7,7 +8,14 @@ const { copyright, credit } = Astro.props;
 ---
 
 <footer class="border-border mt-14 border-t py-6 print:hidden">
-  <p class="text-muted-foreground text-sm">
-    <span>{copyright}</span> <span aria-hidden="true">·</span> <span>{credit}</span>
-  </p>
+  <div class="flex items-center justify-between gap-4">
+    <p class="text-muted-foreground text-sm">{copyright}</p>
+    <img
+      src={logotype.src}
+      width={logotype.width}
+      height={logotype.height}
+      alt={credit}
+      class="h-5 w-auto shrink-0 dark:invert"
+    />
+  </div>
 </footer>

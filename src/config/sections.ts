@@ -5,8 +5,8 @@
 export const SECTION_ORDER = [
   'about',
   'experience',
-  'projects',
   'skills',
+  'projects',
   'education',
   'certificates',
   'achievements',

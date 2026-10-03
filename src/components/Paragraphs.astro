@@ -8,7 +8,7 @@ interface Props {
 const paragraphs = splitParagraphs(Astro.props.text);
 ---
 
-<div class="text-foreground space-y-4 leading-relaxed">
+<div class="text-foreground space-y-4 text-sm leading-relaxed">
   {paragraphs.map((paragraph) => (
     <p>{paragraph}</p>
   ))}

@@ -1,5 +1,6 @@
 ---
 import type { Cv } from '../config';
+import RowList from '../components/RowList.astro';
 import { joinFilled } from '../lib/text';
 
 interface Props {
@@ -7,19 +8,11 @@ interface Props {
 }
 
 const { cv } = Astro.props;
-const entries = (cv.education ?? []).map(({ institution, degree, field, period }) => ({
-  institution,
-  qualification: joinFilled([degree, field], ', '),
-  period
+const rows = (cv.education ?? []).map(({ institution, degree, field, period }) => ({
+  title: institution,
+  details: joinFilled([degree, field], ', '),
+  ...(period === undefined ? {} : { aside: period })
 }));
 ---
 
-<ul class="space-y-6">
-  {entries.map(({ institution, qualification, period }) => (
-    <li>
-      <h3 class="font-semibold">{institution}</h3>
-      {qualification !== '' && <p>{qualification}</p>}
-      {period !== undefined && <p class="text-muted-foreground tabular-nums">{period}</p>}
-    </li>
-  ))}
-</ul>
+<RowList rows={rows} />

@@ -8,12 +8,8 @@ const { id, title } = Astro.props;
 const titleId = `${id}-title`;
 ---
 
-<section
-  id={id}
-  aria-labelledby={titleId}
-  class="scroll-mt-4 pt-14 print:pt-4"
->
-  <h2 id={titleId} class="text-foreground mb-4 text-xl font-semibold tracking-tight">
+<section id={id} aria-labelledby={titleId} class="scroll-mt-4 pt-8 print:pt-4">
+  <h2 id={titleId} class="text-foreground mb-4 font-serif text-[20px] font-medium tracking-tight">
     {title}
   </h2>
   <slot />
