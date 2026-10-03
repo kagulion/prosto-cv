@@ -178,9 +178,8 @@ export default defineCV({
   labels: {
     sections: {
       experience: { title: 'Опыт работы', nav: 'Опыт' }
-    },
-    pdfButton: 'PDF' // false убирает кнопку
+    }
   },
 
-  footer: { show: true }
+  footer: { logo: true } // false убирает логотип
 });

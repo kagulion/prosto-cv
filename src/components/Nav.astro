@@ -23,7 +23,8 @@ const { items } = Astro.props;
       {items.map(({ id, label }) => (
         <li class="min-w-0 wrap-anywhere">
           <a
-            class="text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground focus-visible:outline-foreground inline-block rounded-sm py-1 pl-4 text-[13px] transition-[color,opacity] duration-150 group-hover/list:opacity-50 hover:opacity-100! ease-out focus-visible:outline-2 focus-visible:outline-offset-2"
+            title={label}
+            class="text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground focus-visible:outline-foreground line-clamp-2 rounded-sm py-1 pl-4 text-[13px] transition-[color,opacity] duration-150 group-hover/list:opacity-50 hover:opacity-100! ease-out focus-visible:outline-2 focus-visible:outline-offset-2"
             href={`#${id}`}
           >
             {label}

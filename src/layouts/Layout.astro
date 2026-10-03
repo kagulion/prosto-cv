@@ -19,7 +19,7 @@ const { lang, title } = Astro.props;
     <slot name="head" />
   </head>
   <body>
-    <div class="mx-auto w-full max-w-176 px-4 wrap-break-word sm:px-6 xl:relative xl:-left-16">
+    <div class="mx-auto flex min-h-dvh w-full max-w-176 flex-col px-4 wrap-break-word sm:px-6 xl:relative xl:-left-16 print:min-h-0">
       <slot />
     </div>
   </body>

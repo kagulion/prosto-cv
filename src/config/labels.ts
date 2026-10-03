@@ -5,7 +5,7 @@ import { mapSectionKeys, type LabelKey } from './sections';
 export type ResolvedLabels = {
   readonly sections: Readonly<Record<LabelKey, { readonly title: string; readonly nav: string }>>;
   readonly availability: DefaultLabels['availability'];
-  /** `null` значит «кнопки нет» (в конфиге `pdfButton: false`). */
+  /** `null` значит «кнопки нет» (в конфиге `labels.pdfButton: false`). Подпись всегда из `DEFAULT_LABELS`. */
   readonly pdfButton: string | null;
   readonly skipLink: string;
   readonly footerCredit: string;
@@ -30,8 +30,7 @@ export const resolveLabels = (cv: Cv): ResolvedLabels => ({
     salary: cv.labels?.availability?.salary ?? DEFAULT_LABELS.availability.salary,
     start: cv.labels?.availability?.start ?? DEFAULT_LABELS.availability.start
   },
-  pdfButton:
-    cv.labels?.pdfButton === false ? null : (cv.labels?.pdfButton ?? DEFAULT_LABELS.pdfButton),
+  pdfButton: cv.labels?.pdfButton === false ? null : DEFAULT_LABELS.pdfButton,
   skipLink: cv.labels?.skipLink ?? DEFAULT_LABELS.skipLink,
   footerCredit: cv.footer.credit ?? DEFAULT_LABELS.footerCredit
 });

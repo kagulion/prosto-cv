@@ -10,14 +10,12 @@ export type PersonJsonLd = {
   readonly jobTitle: string;
   readonly url: string;
   readonly sameAs?: readonly string[];
-  readonly image?: string;
 };
 
 /** Person для поисковиков. Почты и телефона здесь нет намеренно. */
 export const buildPersonJsonLd = (
   cv: Pick<Cv, 'name' | 'position' | 'contacts'>,
-  url: string,
-  photoUrl?: string
+  url: string
 ): PersonJsonLd => {
   const sameAs = buildContactLinks(cv.contacts).flatMap((contact) =>
     SAME_AS_KINDS.includes(contact.kind) && contact.href !== undefined ? [contact.href] : []
@@ -28,8 +26,7 @@ export const buildPersonJsonLd = (
     name: cv.name,
     jobTitle: cv.position,
     url,
-    ...(sameAs.length > 0 ? { sameAs } : {}),
-    ...(photoUrl === undefined ? {} : { image: photoUrl })
+    ...(sameAs.length > 0 ? { sameAs } : {})
   };
 };
 

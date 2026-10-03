@@ -1,11 +1,22 @@
 import { z } from 'astro/zod';
 import { suggestKey } from './suggest';
 
+/** Пределы длины: строка в одну-две строки на экране и многоабзацный текст. */
+export const MAX_LINE = 600;
+export const MAX_PARAGRAPHS = 3000;
+
 /** Любая строка обрезается по краям. Пустое после обрезки потом убирает `pruneEmpty`. */
-export const text = z.string().trim();
+export const text = z.string().trim().max(MAX_LINE);
+
+/** Текст в несколько абзацев: «О себе», цитата, увлечения. */
+export const longText = z.string().trim().max(MAX_PARAGRAPHS);
+export const optionalLongText = longText.optional();
 
 /** Обязательная строка поля. */
 export const required = text.min(1, 'обязательное поле');
+
+/** Обязательный многоабзацный текст. */
+export const requiredLong = longText.min(1, 'обязательное поле');
 
 /** Пункт списка строк: пустой пункт это ошибка с индексом. */
 export const filled = text.min(1, 'не может быть пустым');

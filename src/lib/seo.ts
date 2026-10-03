@@ -1,7 +1,6 @@
 import type { Cv } from '../config';
 import { splitContacts } from './contact-links';
 import { buildPersonJsonLd, serializeJsonLd } from './json-ld';
-import type { PhotoView } from './photo';
 import { joinFilled } from './text';
 
 export const OG_IMAGE_PATH = 'og.png';
@@ -40,7 +39,7 @@ const ogLocale = (lang: string): string | undefined => {
 };
 
 /** Всё для `<head>`: значения по умолчанию из имени, должности и локации. Чистая функция. */
-export const buildSeo = ({ cv, photo }: { readonly cv: Cv; readonly photo?: PhotoView }): Seo => {
+export const buildSeo = ({ cv }: { readonly cv: Cv }): Seo => {
   const title = cv.seo?.title ?? joinFilled([cv.name, cv.position], ', ');
   const location = splitContacts(cv.contacts).location;
   const description = cv.seo?.description ?? joinFilled([cv.position, location], ', ');
@@ -50,8 +49,6 @@ export const buildSeo = ({ cv, photo }: { readonly cv: Cv; readonly photo?: Phot
   const canonical = siteUrl === undefined ? undefined : new URL(siteUrl).href;
   const imageUrl =
     siteUrl === undefined ? undefined : new URL(OG_IMAGE_PATH, withTrailingSlash(siteUrl)).href;
-  const photoUrl =
-    photo === undefined || siteUrl === undefined ? undefined : new URL(photo.src, siteUrl).href;
 
   return {
     title,
@@ -78,6 +75,6 @@ export const buildSeo = ({ cv, photo }: { readonly cv: Cv; readonly photo?: Phot
     ...(imageUrl === undefined ? {} : { twitterCard: 'summary_large_image' as const }),
     ...(canonical === undefined || noindex
       ? {}
-      : { jsonLd: serializeJsonLd(buildPersonJsonLd(cv, canonical, photoUrl)) })
+      : { jsonLd: serializeJsonLd(buildPersonJsonLd(cv, canonical)) })
   };
 };

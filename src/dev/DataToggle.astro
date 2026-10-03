@@ -1,0 +1,26 @@
+---
+import { DATA_MODES, type DataMode } from './pick-config';
+
+interface Props {
+  readonly current: DataMode;
+}
+
+const { current } = Astro.props;
+---
+
+<!-- Dev-only: рисуется только при `import.meta.env.DEV`, в сборку не попадает. -->
+<nav
+  aria-label="Данные страницы"
+  class="print:hidden"
+  style="position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:2px;padding:3px;border-radius:999px;background:#d4d4d8;font:12px system-ui,sans-serif"
+>
+  {DATA_MODES.map(({ mode, label }) => (
+    <a
+      href={`?data=${mode}`}
+      aria-current={mode === current ? 'true' : undefined}
+      style={`padding:5px 12px;border-radius:999px;white-space:nowrap;text-decoration:none;color:#18181b;${mode === current ? 'background:#fff;' : ''}`}
+    >
+      {label}
+    </a>
+  ))}
+</nav>

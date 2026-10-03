@@ -1,7 +1,6 @@
 ---
 import type { LinkItem } from '../lib/contact-links';
 import { CONTACTS_ID, splitParagraphs } from '../lib/page-sections';
-import type { PhotoView } from '../lib/photo';
 import ContactIcon from './ContactIcon.astro';
 import PrintButton from './PrintButton.astro';
 
@@ -10,18 +9,16 @@ interface Props {
   readonly position: string;
   /** Город в одном блоке с именем и специализацией. Нет значения, значит строки нет. */
   readonly location?: string;
-  /** Текст «О себе» под специализацией, без заголовка. Нет значения, значит блока нет. */
-  readonly about?: string;
+  /** Текст «О себе» под специализацией, без заголовка. */
+  readonly about: string;
   readonly contactsTitle: string;
   readonly contacts: readonly LinkItem[];
-  /** Фото справа от имени. Нет значения, значит нет ни картинки, ни заглушки. */
-  readonly photo?: PhotoView;
   /** Подпись кнопки печати. Нет значения, значит кнопки и скрипта нет. */
   readonly printLabel?: string;
 }
 
-const { name, position, location, about, contactsTitle, contacts, photo, printLabel } = Astro.props;
-const paragraphs = splitParagraphs(about ?? '');
+const { name, position, location, about, contactsTitle, contacts, printLabel } = Astro.props;
+const paragraphs = splitParagraphs(about);
 const titleId = `${CONTACTS_ID}-title`;
 ---
 
@@ -30,13 +27,13 @@ const titleId = `${CONTACTS_ID}-title`;
     <div class="min-w-0">
       <div class="font-serif font-normal tracking-tight">
         <h1 class="text-2xl font-medium">{name}</h1>
-        <p class="mt-0.5 text-lg">
-          {position}
+        <p class="mt-0.5 flex flex-col text-lg sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-4">
+          <span>{position}</span>
           {location !== undefined && (
-            <>
-              <span aria-hidden="true" class="mx-4 inline-block size-1 bg-current align-middle" />
+            <span class="sm:flex sm:items-baseline sm:gap-x-4">
+              <span aria-hidden="true" class="hidden size-1 bg-current sm:inline-block" />
               {location}
-            </>
+            </span>
           )}
         </p>
       </div>
@@ -48,29 +45,24 @@ const titleId = `${CONTACTS_ID}-title`;
         </div>
       )}
     </div>
-    {photo !== undefined && (
-      <img
-        src={photo.src}
-        width={photo.width}
-        height={photo.height}
-        alt={photo.alt}
-        loading="eager"
-        class="size-16 shrink-0 rounded-lg object-cover sm:size-24"
-      />
-    )}
   </div>
   <section id={CONTACTS_ID} aria-labelledby={titleId} class="mt-14">
     <h2 id={titleId} class="sr-only">
       {contactsTitle}
     </h2>
-    <ul class="flex flex-wrap gap-2 print:gap-x-6 print:gap-y-2">
+    <ul class="flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap print:gap-x-6 print:gap-y-2">
       {contacts.map(({ kind, display, href }) => (
-        <li class="min-w-0 wrap-anywhere" title={display}>
-          <a class="icon-button" href={href}>
+        <li class="max-w-full min-w-0 wrap-anywhere" title={display}>
+          <a
+            class="icon-button max-sm:h-auto max-sm:min-h-9 max-sm:justify-start max-sm:gap-2 max-sm:px-2.5 max-sm:py-1.5"
+            href={href}
+          >
             <span class="inline-flex print:hidden">
               <ContactIcon kind={kind} />
             </span>
-            <span class="sr-only print:not-sr-only">{display}</span>
+            <span class="sr-only max-sm:not-sr-only max-sm:min-w-0 max-sm:text-sm print:not-sr-only">
+              {display}
+            </span>
           </a>
         </li>
       ))}

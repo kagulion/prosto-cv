@@ -3,9 +3,11 @@ import { optionalLink, optionalLocation } from './contacts';
 import {
   filled,
   list,
+  optionalLongText,
   optionalText,
   optionalUrl,
   required,
+  requiredLong,
   strictObject,
   stringList,
   text
@@ -43,7 +45,7 @@ const year = z
 
 // `satisfies` не даёт забыть секцию из `SECTION_ORDER` и добавить лишнюю.
 const sectionSchemas = {
-  about: optionalText,
+  about: requiredLong,
   experience: list(
     strictObject({ position: required, company: required, period: required, bullets: stringList })
   ),
@@ -70,10 +72,15 @@ const sectionSchemas = {
   openSource: linkList,
   languages: list(strictObject({ name: required, level: optionalText, note: optionalText })),
   tools: stringList,
-  volunteering: optionalText,
-  interests: optionalText,
+  volunteering: optionalLongText,
+  interests: optionalLongText,
   recommendations: list(
-    strictObject({ quote: required, author: required, role: optionalText, company: optionalText })
+    strictObject({
+      quote: requiredLong,
+      author: required,
+      role: optionalText,
+      company: optionalText
+    })
   ),
   availability: strictObject({
     format: optionalText,
@@ -85,20 +92,9 @@ const sectionSchemas = {
 
 const sectionLabel = strictObject({ title: optionalText, nav: optionalText }).optional();
 
-const pdfButtonMessage = 'ожидалась строка или false';
-
-/** Подпись кнопки печати или `false`, чтобы убрать кнопку. `true` и числа это ошибка. */
+/** Подпись кнопки печати задана интерфейсом и не меняется. `false` убирает кнопку целиком. */
 const pdfButton = z
-  .union(
-    [
-      text,
-      z
-        .boolean()
-        .refine((value) => !value, pdfButtonMessage)
-        .transform(() => false as const)
-    ],
-    pdfButtonMessage
-  )
+  .literal(false, { error: 'подпись кнопки не меняется, допустимо только false' })
   .optional();
 
 const availabilityLabels = strictObject({
@@ -115,9 +111,6 @@ const labels = strictObject({
   skipLink: optionalText
 }).optional();
 
-/** Фото в шапке: файл из `src/assets` и обязательное описание для читалки с экрана. */
-const photo = strictObject({ src: required, alt: required }).optional();
-
 /** SEO: заголовок и описание вместо выводимых, адрес сайта для canonical и превью, закрытие от индексации. */
 const seo = strictObject({
   title: optionalText,
@@ -126,17 +119,17 @@ const seo = strictObject({
   noindex: z.boolean().optional()
 }).optional();
 
-const footer = strictObject({ show: z.boolean().default(true), credit: optionalText }).default({
-  show: true
+/** Футер есть всегда. `logo: false` убирает логотип, `credit` задаёт его alt текст. */
+const footer = strictObject({ logo: z.boolean().default(true), credit: optionalText }).default({
+  logo: true
 });
 
 export const cvSchema = strictObject({
   lang: text
     .regex(/^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/, 'ожидался код языка, например ru или en-US')
     .default('ru'),
-  name: required,
-  position: required,
-  photo,
+  name: required.max(80),
+  position: required.max(120),
   seo,
   contacts,
   ...sectionSchemas,
