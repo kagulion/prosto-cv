@@ -61,7 +61,6 @@ export default defineCV({
     },
     {
       name: 'Трекер задач',
-      tag: 'pet-проект',
       description: 'Канбан-доска с drag-and-drop',
       tech: ['React', 'Zustand', 'Vite']
     },

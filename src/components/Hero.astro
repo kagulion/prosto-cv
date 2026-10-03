@@ -1,5 +1,5 @@
 ---
-import type { ContactItem } from '../lib/contact-links';
+import type { LinkItem } from '../lib/contact-links';
 import { CONTACTS_ID, splitParagraphs } from '../lib/page-sections';
 import type { PhotoView } from '../lib/photo';
 import ContactIcon from './ContactIcon.astro';
@@ -13,7 +13,7 @@ interface Props {
   /** Текст «О себе» под специализацией, без заголовка. Нет значения, значит блока нет. */
   readonly about?: string;
   readonly contactsTitle: string;
-  readonly contacts: readonly ContactItem[];
+  readonly contacts: readonly LinkItem[];
   /** Фото справа от имени. Нет значения, значит нет ни картинки, ни заглушки. */
   readonly photo?: PhotoView;
   /** Подпись кнопки печати. Нет значения, значит кнопки и скрипта нет. */
@@ -66,21 +66,12 @@ const titleId = `${CONTACTS_ID}-title`;
     <ul class="flex flex-wrap gap-2 print:gap-x-6 print:gap-y-2">
       {contacts.map(({ kind, display, href }) => (
         <li class="min-w-0 wrap-anywhere" title={display}>
-          {href === undefined ? (
-            <span class="icon-chip">
-              <span class="inline-flex print:hidden">
-                <ContactIcon kind={kind} />
-              </span>
-              <span class="sr-only print:not-sr-only">{display}</span>
+          <a class="icon-button" href={href}>
+            <span class="inline-flex print:hidden">
+              <ContactIcon kind={kind} />
             </span>
-          ) : (
-            <a class="icon-button" href={href}>
-              <span class="inline-flex print:hidden">
-                <ContactIcon kind={kind} />
-              </span>
-              <span class="sr-only print:not-sr-only">{display}</span>
-            </a>
-          )}
+            <span class="sr-only print:not-sr-only">{display}</span>
+          </a>
         </li>
       ))}
       {printLabel !== undefined && <PrintButton label={printLabel} />}

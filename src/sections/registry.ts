@@ -11,7 +11,6 @@ import Projects from './Projects.astro';
 import Publications from './Publications.astro';
 import Recommendations from './Recommendations.astro';
 import Skills from './Skills.astro';
-
 import Tools from './Tools.astro';
 import Volunteering from './Volunteering.astro';
 
@@ -19,7 +18,7 @@ export type SectionComponent = typeof Experience;
 
 /**
  * Реестр компонентов секций: запись на каждый ключ `SECTION_ORDER`.
- * `null` значит «секция ещё не построена», на странице её нет. Новая секция заменяет свой `null`.
+ * `null` значит «у секции нет своего компонента»: «О себе» рисует `Hero`, остальные ждут компонента. Новая секция заменяет свой `null`.
  */
 export const SECTION_REGISTRY: Readonly<Record<SectionKey, SectionComponent | null>> = {
   about: null,

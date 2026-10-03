@@ -13,7 +13,7 @@ const { label } = Astro.props;
 </li>
 
 <script>
-  // Единственный клиентский скрипт страницы. Без JS блок с кнопкой остаётся скрытым.
+  // Без JS блок с кнопкой остаётся скрытым.
   const wrapper = document.querySelector<HTMLElement>('[data-print-button]');
   if (wrapper) {
     wrapper.hidden = false;

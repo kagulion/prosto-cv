@@ -9,7 +9,7 @@ import SeoHead from '../components/SeoHead.astro';
 import { ConfigError, loadConfig, resolveLabels } from '../config';
 import { CONFIG_FILE } from '../config/load';
 import Layout from '../layouts/Layout.astro';
-import { buildContactLinks } from '../lib/contact-links';
+import { splitContacts } from '../lib/contact-links';
 import { buildFooter } from '../lib/footer';
 import { buildNavItems } from '../lib/nav-items';
 import { buildSections } from '../lib/page-sections';
@@ -21,10 +21,8 @@ const cv = loadConfig();
 const labels = resolveLabels(cv);
 const sections = buildSections(cv, labels, SECTION_REGISTRY);
 const navItems = buildNavItems(sections, labels);
-const allContacts = buildContactLinks(cv.contacts);
 // Локация не иконка-контакт: она идёт текстом под специализацией.
-const contacts = allContacts.filter(({ kind }) => kind !== 'location');
-const location = allContacts.find(({ kind }) => kind === 'location')?.display;
+const { links: contacts, location } = splitContacts(cv.contacts);
 // Край: Vite собирает карту картинок из `src/assets`, `getImage` оптимизирует фото на сборке.
 const photoAssets = import.meta.glob<{ readonly default: ImageMetadata }>(
   '/src/assets/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}',

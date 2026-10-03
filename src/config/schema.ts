@@ -52,8 +52,7 @@ const sectionSchemas = {
       name: required,
       description: optionalText,
       tech: stringList,
-      url: optionalUrl,
-      tag: optionalText
+      url: optionalUrl
     })
   ),
   skills: stringList,

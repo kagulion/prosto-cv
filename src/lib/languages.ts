@@ -1,7 +1,7 @@
 import { joinFilled } from './text';
 
-/** Строка языка: «Название: уровень (пояснение)». Пустые части не оставляют знаков. */
-export const languageLine = ({
+/** Части строки языка: название и остаток («: уровень (пояснение)»). Пустые части не оставляют знаков. */
+export const languageParts = ({
   name,
   level,
   note
@@ -9,7 +9,11 @@ export const languageLine = ({
   readonly name: string;
   readonly level?: string;
   readonly note?: string;
-}): string => {
-  const base = joinFilled([name, level], ': ');
-  return note === undefined || note === '' ? base : `${base} (${note})`;
+}): { readonly name: string; readonly rest: string } => {
+  const levelPart = joinFilled([level], '');
+  const notePart = joinFilled([note], '');
+  return {
+    name,
+    rest: `${levelPart === '' ? '' : `: ${levelPart}`}${notePart === '' ? '' : ` (${notePart})`}`
+  };
 };

@@ -1,17 +1,13 @@
 ---
 import type { Cv } from '../config';
-import { languageLine } from '../lib/languages';
+import { languageParts } from '../lib/languages';
 
 interface Props {
   readonly cv: Cv;
 }
 
 const { cv } = Astro.props;
-// Название выделяем отдельно, остаток строки («: уровень (пояснение)») берём из той же сборки.
-const lines = (cv.languages ?? []).map((language) => ({
-  name: language.name,
-  rest: languageLine(language).slice(language.name.length)
-}));
+const lines = (cv.languages ?? []).map(languageParts);
 ---
 
 <ul class="space-y-1 text-sm">

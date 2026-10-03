@@ -6,7 +6,7 @@
 
 - **Language / Runtime**: TypeScript 6 (`astro/tsconfigs/strict`), Node, ES modules
 - **Framework**: Astro 7, статическая сборка, язык страницы `ru`
-- **Key dependencies**: Tailwind 4 (через `@tailwindcss/vite`), `@lucide/astro` (иконки), шрифты Geist и Geist Mono (`@fontsource-variable`), `satori`, `satori-html`, `@resvg/resvg-js` (OG картинка на сборке)
+- **Key dependencies**: Tailwind 4 (через `@tailwindcss/vite`), `@lucide/astro` (иконки), шрифт Geist (`@fontsource-variable`), `satori`, `satori-html`, `@resvg/resvg-js` (OG картинка на сборке)
 - **Package manager**: pnpm 11 (закреплён в `devEngines`)
 - **Quality tools**: ESLint 10 (`typescript-eslint`, `eslint-plugin-astro`), Prettier (плагины Astro и Tailwind)
 

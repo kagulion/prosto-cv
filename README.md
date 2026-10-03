@@ -43,28 +43,28 @@
 
 ## Что можно указать в конфиге
 
-| Поле                                         | Что это                                                                                |
-| -------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `lang`                                       | Язык страницы, например `ru` или `en`                                                  |
-| `name`, `position`                           | Имя и должность в шапке (обязательно)                                                  |
-| `photo`                                      | Фото в шапке: `{ src, alt }`                                                           |
-| `seo`                                        | Адрес сайта, описание, заголовок вкладки, `noindex`                                    |
-| `contacts`                                   | `phone`, `email`, `telegram`, `github`, `linkedin`, `location`                         |
-| `about`                                      | Текст о себе                                                                           |
-| `experience`                                 | Места работы: `position`, `company`, `period`, `bullets`                               |
-| `projects`                                   | Проекты: `name`, `description`, `tech`, `url`, `tag`                                   |
-| `skills`, `tools`                            | Списки строк                                                                           |
-| `education`                                  | `institution`, `degree`, `field`, `period`                                             |
-| `certificates`                               | `title`, `issuer`, `year`                                                              |
-| `achievements`, `publications`, `openSource` | Списки: строка или `{ text, url }`, если нужна ссылка                                  |
-| `languages`                                  | `name`, `level`, `note`                                                                |
-| `volunteering`, `interests`                  | Простой текст                                                                          |
-| `recommendations`                            | `quote`, `author`, `role`, `company`                                                   |
-| `availability`                               | `format`, `employment`, `salary`, `start`                                              |
+| Поле                                         | Что это                                                                                       |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `lang`                                       | Язык страницы, например `ru` или `en`                                                         |
+| `name`, `position`                           | Имя и должность в шапке (обязательно)                                                         |
+| `photo`                                      | Фото в шапке: `{ src, alt }`                                                                  |
+| `seo`                                        | Адрес сайта, описание, заголовок вкладки, `noindex`                                           |
+| `contacts`                                   | `phone`, `email`, `telegram`, `github`, `linkedin`, `location`                                |
+| `about`                                      | Текст о себе                                                                                  |
+| `experience`                                 | Места работы: `position`, `company`, `period`, `bullets`                                      |
+| `projects`                                   | Проекты: `name`, `description`, `tech`, `url`                                                 |
+| `skills`, `tools`                            | Списки строк                                                                                  |
+| `education`                                  | `institution`, `degree`, `field`, `period`                                                    |
+| `certificates`                               | `title`, `issuer`, `year`                                                                     |
+| `achievements`, `publications`, `openSource` | Списки: строка или `{ text, url }`, если нужна ссылка                                         |
+| `languages`                                  | `name`, `level`, `note`                                                                       |
+| `volunteering`, `interests`                  | Простой текст                                                                                 |
+| `recommendations`                            | `quote`, `author`, `role`, `company`                                                          |
+| `availability`                               | `format`, `employment`, `salary`, `start`                                                     |
 | `labels`                                     | Тексты интерфейса: названия секций, подпись кнопки сохранения, ссылка «Перейти к содержимому» |
-| `footer`                                     | `{ show: false }` убирает футер, `credit` меняет подпись                               |
+| `footer`                                     | `{ show: false }` убирает футер, `credit` задаёт alt текст логотипа                           |
 
-Лучший справочник это сам `cv.config.ts`: в нём заполнены все поля. Типы подсказывают допустимые значения прямо в редакторе.
+Лучший справочник это сам `cv.config.ts`: в нём показаны почти все поля. Типы подсказывают допустимые значения прямо в редакторе.
 
 Секции идут на странице в фиксированном порядке, как в таблице выше.
 
@@ -90,7 +90,7 @@
 
 ## PDF
 
-Под контактами есть кнопка «Скачать резюме». Она открывает окно печати браузера, где нужно выбрать «Сохранить как PDF». Для печати у страницы есть отдельная вёрстка: кнопка и навигация скрываются, остаётся только резюме.
+Среди контактов есть кнопка «Сохранить резюме». Она открывает окно печати браузера, где нужно выбрать «Сохранить как PDF». Для печати у страницы есть отдельная вёрстка: кнопка и навигация скрываются, остаётся только резюме.
 
 Подпись кнопки меняется через `labels.pdfButton`, а `pdfButton: false` убирает её совсем. Окно печати можно открыть и самому, сочетанием Ctrl+P (на Mac Cmd+P).
 

@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/geist';
-@import '@fontsource-variable/geist-mono';
 @import '@fontsource-variable/source-serif-4';
 
 @custom-variant dark (&:is(.dark, .dark *));
@@ -76,7 +75,6 @@
 
 @theme inline {
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
   --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
 
   --color-background: var(--background);
@@ -185,19 +183,6 @@
     &:hover {
       @apply bg-accent;
     }
-  }
-}
-
-/* Кавычки цитаты по языку страницы (`<html lang>`): ставит CSS, в данных их нет. */
-@utility quoted {
-  quotes: auto;
-
-  &::before {
-    content: open-quote;
-  }
-
-  &::after {
-    content: close-quote;
   }
 }
 

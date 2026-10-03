@@ -1,5 +1,5 @@
 import type { Cv } from '../config';
-import { buildContactLinks } from './contact-links';
+import { splitContacts } from './contact-links';
 import { buildPersonJsonLd, serializeJsonLd } from './json-ld';
 import type { PhotoView } from './photo';
 import { joinFilled } from './text';
@@ -42,7 +42,7 @@ const ogLocale = (lang: string): string | undefined => {
 /** Всё для `<head>`: значения по умолчанию из имени, должности и локации. Чистая функция. */
 export const buildSeo = ({ cv, photo }: { readonly cv: Cv; readonly photo?: PhotoView }): Seo => {
   const title = cv.seo?.title ?? joinFilled([cv.name, cv.position], ', ');
-  const location = buildContactLinks(cv.contacts).find((c) => c.kind === 'location')?.display;
+  const location = splitContacts(cv.contacts).location;
   const description = cv.seo?.description ?? joinFilled([cv.position, location], ', ');
   const locale = ogLocale(cv.lang);
   const noindex = cv.seo?.noindex === true;
