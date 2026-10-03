@@ -21,7 +21,7 @@ const { items } = Astro.props;
   <div class="sticky top-[94px]">
     <ul class="group/list border-border flex flex-col gap-y-0 border-l">
       {items.map(({ id, label }) => (
-        <li class="min-w-0 wrap-anywhere">
+        <li class="before:bg-foreground has-[[aria-current=location]]:before:scale-y-100 relative min-w-0 wrap-anywhere before:absolute before:inset-y-0 before:-left-px before:w-px before:scale-y-0 before:transition-transform before:duration-200 before:ease-out">
           <a
             title={label}
             class="text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground focus-visible:outline-foreground line-clamp-2 rounded-sm py-1 pl-4 text-[13px] transition-[color,opacity] duration-150 group-hover/list:opacity-50 hover:opacity-100! ease-out focus-visible:outline-2 focus-visible:outline-offset-2"

@@ -186,6 +186,34 @@
   }
 }
 
+/*
+ * Движение. Только на экране и только если пользователь не просил убрать анимации.
+ * Появление шапки при загрузке: короткий каскад (`--i` задаёт порядок, шаг 60мс).
+ * Секции проявляются при прокрутке на scroll-driven animations, без JS; где API нет, остаются
+ * просто видимыми.
+ */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation: rise-in 360ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
 /* Печать: резюме на бумаге без экранных отступов. Цвета остаются токенами светлой темы. */
 @page {
   margin: 15mm;
@@ -204,5 +232,44 @@
   h2,
   h3 {
     break-after: avoid;
+  }
+}
+
+/*
+ * Карточка проекта со ссылкой: лёгкий подъём, обводка и стрелка «уходит» по диагонали.
+ * Подъём через `translate`, чтобы не спорить с `transform` анимации появления.
+ * Только для мыши, на тач-экранах hover залипает.
+ */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .project-card {
+    transition:
+      translate 200ms cubic-bezier(0.23, 1, 0.32, 1),
+      scale 120ms ease-out,
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .project-card:active {
+    scale: 0.985;
+  }
+
+  .project-arrow {
+    transition: translate 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+@media screen and (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    @apply border-foreground/30 shadow-sm;
+  }
+
+  .project-card:hover .project-arrow {
+    translate: 2px -2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .project-card:hover {
+      translate: 0 -2px;
+    }
   }
 }
