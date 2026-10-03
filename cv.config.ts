@@ -1,5 +1,10 @@
 import { defineCV } from './src/config/define';
 
+/**
+ * Единственный файл, который нужно править. Здесь лежит пример на вымышленных данных:
+ * замените их своими. Любую необязательную секцию можно удалить, тогда её не будет
+ * на странице. Подробности в README.md.
+ */
 export default defineCV({
   lang: 'ru',
   name: 'Иван Иванов',
@@ -176,7 +181,8 @@ export default defineCV({
   labels: {
     sections: {
       experience: { title: 'Опыт работы', nav: 'Опыт' }
-    }
+    },
+    pdfButton: 'Скачать резюме (PDF)' // false убирает кнопку
   },
 
   footer: { show: true }
