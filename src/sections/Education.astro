@@ -19,7 +19,7 @@ const entries = (cv.education ?? []).map(({ institution, degree, field, period }
     <li>
       <h3 class="font-semibold">{institution}</h3>
       {qualification !== '' && <p>{qualification}</p>}
-      {period !== undefined && <p class="text-muted-foreground">{period}</p>}
+      {period !== undefined && <p class="text-muted-foreground tabular-nums">{period}</p>}
     </li>
   ))}
 </ul>

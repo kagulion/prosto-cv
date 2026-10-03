@@ -7,7 +7,12 @@ const { label } = Astro.props;
 ---
 
 <div class="mt-4 print:hidden">
-  <button type="button" hidden data-print-button class="link cursor-pointer">
+  <button
+    type="button"
+    hidden
+    data-print-button
+    class="link cursor-pointer transition-[transform,text-decoration-color] duration-150 ease-out active:scale-[0.97]"
+  >
     {label}
   </button>
 </div>

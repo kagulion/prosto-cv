@@ -120,6 +120,26 @@
     @apply border-border outline-ring/50;
   }
 
+  :root {
+    color-scheme: light;
+  }
+
+  /* Плавный переход по якорям, если пользователь не просил убрать движение. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  h1,
+  h2 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
   body {
     @apply bg-background font-sans text-foreground antialiased;
   }
@@ -130,8 +150,15 @@
  * на белом не дотягивает до контраста 3:1 (WCAG 1.4.11).
  */
 @utility link {
-  @apply text-foreground underline underline-offset-4;
+  @apply text-foreground underline decoration-foreground/40 underline-offset-4;
+  @apply transition-[text-decoration-color] duration-150 ease-out;
   @apply focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @apply decoration-foreground;
+    }
+  }
 }
 
 /* Кавычки цитаты по языку страницы (`<html lang>`): ставит CSS, в данных их нет. */

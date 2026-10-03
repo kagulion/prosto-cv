@@ -14,7 +14,7 @@ const places = cv.experience ?? [];
     <li>
       <h3 class="font-semibold">{position}</h3>
       <p>{company}</p>
-      <p class="text-muted-foreground">{period}</p>
+      <p class="text-muted-foreground tabular-nums">{period}</p>
       {bullets !== undefined && bullets.length > 0 && (
         <ul class="mt-2 list-disc space-y-1 pl-5">
           {bullets.map((bullet) => (
