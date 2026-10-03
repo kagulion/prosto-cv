@@ -1,7 +1,6 @@
 import type { SectionKey } from '../config';
 import Availability from './Availability.astro';
 import Achievements from './Achievements.astro';
-import About from './About.astro';
 import Certificates from './Certificates.astro';
 import Education from './Education.astro';
 import Experience from './Experience.astro';
@@ -16,14 +15,14 @@ import Skills from './Skills.astro';
 import Tools from './Tools.astro';
 import Volunteering from './Volunteering.astro';
 
-export type SectionComponent = typeof About;
+export type SectionComponent = typeof Experience;
 
 /**
  * Реестр компонентов секций: запись на каждый ключ `SECTION_ORDER`.
  * `null` значит «секция ещё не построена», на странице её нет. Новая секция заменяет свой `null`.
  */
 export const SECTION_REGISTRY: Readonly<Record<SectionKey, SectionComponent | null>> = {
-  about: About,
+  about: null,
   experience: Experience,
   projects: Projects,
   skills: Skills,

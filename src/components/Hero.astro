@@ -1,12 +1,17 @@
 ---
 import type { ContactItem } from '../lib/contact-links';
-import { CONTACTS_ID } from '../lib/page-sections';
+import { CONTACTS_ID, splitParagraphs } from '../lib/page-sections';
 import type { PhotoView } from '../lib/photo';
+import ContactIcon from './ContactIcon.astro';
 import PrintButton from './PrintButton.astro';
 
 interface Props {
   readonly name: string;
   readonly position: string;
+  /** Город в одном блоке с именем и специализацией. Нет значения, значит строки нет. */
+  readonly location?: string;
+  /** Текст «О себе» под специализацией, без заголовка. Нет значения, значит блока нет. */
+  readonly about?: string;
   readonly contactsTitle: string;
   readonly contacts: readonly ContactItem[];
   /** Фото справа от имени. Нет значения, значит нет ни картинки, ни заглушки. */
@@ -15,15 +20,33 @@ interface Props {
   readonly printLabel?: string;
 }
 
-const { name, position, contactsTitle, contacts, photo, printLabel } = Astro.props;
+const { name, position, location, about, contactsTitle, contacts, photo, printLabel } = Astro.props;
+const paragraphs = splitParagraphs(about ?? '');
 const titleId = `${CONTACTS_ID}-title`;
 ---
 
-<header class="py-12 sm:py-16 print:py-4">
+<header class="pt-12 sm:pt-16 print:py-4">
   <div class="flex items-start justify-between gap-4 sm:gap-6">
     <div class="min-w-0">
-      <h1 class="text-4xl font-bold tracking-tight">{name}</h1>
-      <p class="text-muted-foreground mt-2 font-mono text-sm">{position}</p>
+      <div class="font-serif font-normal tracking-tight">
+        <h1 class="text-2xl">{name}</h1>
+        <p class="mt-0.5 text-lg">
+          {position}
+          {location !== undefined && (
+            <>
+              <span aria-hidden="true" class="mx-4 inline-block size-1 bg-current align-middle" />
+              {location}
+            </>
+          )}
+        </p>
+      </div>
+      {paragraphs.length > 0 && (
+        <div class="mt-14 space-y-4 font-serif text-lg leading-relaxed text-pretty">
+          {paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      )}
     </div>
     {photo !== undefined && (
       <img
@@ -36,23 +59,31 @@ const titleId = `${CONTACTS_ID}-title`;
       />
     )}
   </div>
-  <section id={CONTACTS_ID} aria-labelledby={titleId} class="mt-6">
+  <section id={CONTACTS_ID} aria-labelledby={titleId} class="mt-14">
     <h2 id={titleId} class="sr-only">
       {contactsTitle}
     </h2>
-    <ul class="flex flex-wrap gap-x-6 gap-y-2">
-      {contacts.map(({ display, href }) => (
-        <li class="min-w-0 wrap-anywhere">
+    <ul class="flex flex-wrap gap-2 print:gap-x-6 print:gap-y-2">
+      {contacts.map(({ kind, display, href }) => (
+        <li class="min-w-0 wrap-anywhere" title={display}>
           {href === undefined ? (
-            display
+            <span class="icon-chip">
+              <span class="inline-flex print:hidden">
+                <ContactIcon kind={kind} />
+              </span>
+              <span class="sr-only print:not-sr-only">{display}</span>
+            </span>
           ) : (
-            <a class="link" href={href}>
-              {display}
+            <a class="icon-button" href={href}>
+              <span class="inline-flex print:hidden">
+                <ContactIcon kind={kind} />
+              </span>
+              <span class="sr-only print:not-sr-only">{display}</span>
             </a>
           )}
         </li>
       ))}
+      {printLabel !== undefined && <PrintButton label={printLabel} />}
     </ul>
   </section>
-  {printLabel !== undefined && <PrintButton label={printLabel} />}
 </header>

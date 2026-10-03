@@ -1,0 +1,30 @@
+---
+import brands from '@iconify-json/fa6-brands/icons.json';
+import Mail from '@lucide/astro/icons/mail';
+import MapPin from '@lucide/astro/icons/map-pin';
+import Smartphone from '@lucide/astro/icons/smartphone';
+import type { ContactKind } from '../lib/contact-links';
+
+interface Props {
+  readonly kind: ContactKind;
+}
+
+const BASIC = { phone: Smartphone, email: Mail, location: MapPin } as const;
+const BRANDS = { telegram: 'telegram', github: 'github', linkedin: 'linkedin' } as const;
+
+const { kind } = Astro.props;
+const Basic = kind in BASIC ? BASIC[kind as keyof typeof BASIC] : undefined;
+const brand = kind in BRANDS ? BRANDS[kind as keyof typeof BRANDS] : undefined;
+const brandBody = brand === undefined ? undefined : brands.icons[brand].body;
+---
+
+{Basic !== undefined && <Basic class="size-4" aria-hidden="true" />}
+{brandBody !== undefined && (
+  <svg
+    class="size-4"
+    viewBox={`0 0 ${brands.width} ${brands.height}`}
+    fill="currentColor"
+    aria-hidden="true"
+    set:html={brandBody}
+  />
+)}

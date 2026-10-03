@@ -40,7 +40,7 @@ export const DEFAULT_LABELS: DefaultLabels = {
     salary: 'Зарплатные ожидания',
     start: 'Срок выхода'
   },
-  pdfButton: 'Сохранить в PDF',
+  pdfButton: 'Сохранить резюме',
   skipLink: 'Перейти к содержимому',
   footerCredit: 'Prosto CV'
 };

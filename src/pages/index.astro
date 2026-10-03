@@ -21,7 +21,10 @@ const cv = loadConfig();
 const labels = resolveLabels(cv);
 const sections = buildSections(cv, labels, SECTION_REGISTRY);
 const navItems = buildNavItems(sections, labels);
-const contacts = buildContactLinks(cv.contacts);
+const allContacts = buildContactLinks(cv.contacts);
+// Локация не иконка-контакт: она идёт текстом под специализацией.
+const contacts = allContacts.filter(({ kind }) => kind !== 'location');
+const location = allContacts.find(({ kind }) => kind === 'location')?.display;
 // Край: Vite собирает карту картинок из `src/assets`, `getImage` оптимизирует фото на сборке.
 const photoAssets = import.meta.glob<{ readonly default: ImageMetadata }>(
   '/src/assets/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}',
@@ -64,14 +67,16 @@ const footer = buildFooter({
   <Hero
     name={cv.name}
     position={cv.position}
+    location={location}
+    about={cv.about}
     contactsTitle={labels.sections.contacts.title}
     contacts={contacts}
     photo={photo}
     printLabel={labels.pdfButton ?? undefined}
   />
-  {navItems.length > 0 && <Nav items={navItems} />}
   {sections.length > 0 && (
-    <main id="main">
+    <main id="main" class="relative">
+      {navItems.length > 0 && <Nav items={navItems} />}
       {sections.map(({ id, title, component: Content }) => (
         <Section id={id} title={title}>
           <Content cv={cv} />

@@ -1,11 +1,12 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/geist';
 @import '@fontsource-variable/geist-mono';
+@import '@fontsource-variable/source-serif-4';
 
 @custom-variant dark (&:is(.dark, .dark *));
 
 :root {
-  --background: oklch(1 0 0);
+  --background: oklch(0.985 0.0015 286.375);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -76,6 +77,7 @@
 @theme inline {
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+  --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -157,6 +159,31 @@
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       @apply decoration-foreground;
+    }
+  }
+}
+
+/*
+ * Иконка-контакт в шапке: квадрат с лёгкой обводкой. В печати иконки скрыты и остаётся
+ * текст контакта, поэтому рамка и размер сбрасываются.
+ */
+@utility icon-chip {
+  @apply inline-flex h-8 min-w-8 items-center justify-center rounded-md border border-border text-foreground;
+
+  @media print {
+    @apply h-auto min-w-0 rounded-none border-0;
+  }
+}
+
+/* Кликабельная иконка: фокус как у `link`, нажатие как у кнопки печати. */
+@utility icon-button {
+  @apply icon-chip;
+  @apply transition-[transform,background-color] duration-150 ease-out active:scale-[0.97];
+  @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @apply bg-accent;
     }
   }
 }

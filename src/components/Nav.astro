@@ -8,14 +8,65 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<nav class="pb-6 print:hidden">
-  <ul class="flex flex-wrap gap-x-4 gap-y-0">
-    {items.map(({ id, label }) => (
-      <li class="min-w-0 wrap-anywhere">
-        <a class="link inline-block py-1" href={`#${id}`}>
-          {label}
-        </a>
-      </li>
-    ))}
-  </ul>
+<!--
+  Содержание справа от колонки: рамка на всю высоту `main`, внутри липкий список.
+  Верх выровнен по заголовку первой секции (её `pt-14`), при прокрутке список липнет к `top-16`.
+  Правый край `main` отстоит от края колонки на 1.5rem (`sm:px-6`): зазор 6rem до колонки даёт `ml-30`.
+  Влезает с `xl`, ниже скрыто.
+-->
+<nav data-nav class="absolute inset-y-0 left-full ml-30 hidden w-44 pt-14 xl:block print:hidden">
+  <div class="sticky top-16">
+    <ul class="border-border flex flex-col gap-y-0 border-l">
+      {items.map(({ id, label }) => (
+        <li class="min-w-0 wrap-anywhere">
+          <a
+            class="text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground focus-visible:outline-foreground inline-block rounded-sm py-1 pl-4 text-sm transition-colors duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2"
+            href={`#${id}`}
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </nav>
+
+<script>
+  // Подсветка текущей секции в содержании. Активной считается секция, верх которой
+  // ближе всего к линии на пятой части высоты экрана; внизу страницы это самая нижняя секция.
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  const links = nav ? [...nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')] : [];
+  const targets = links.flatMap((link) => {
+    const target = document.getElementById(link.hash.slice(1));
+    return target ? [{ link, target }] : [];
+  });
+
+  if (targets.length > 0) {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const line = window.innerHeight * 0.2;
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      const tops = targets.map((entry) => ({
+        ...entry,
+        top: entry.target.getBoundingClientRect().top
+      }));
+      const pool = atBottom ? tops : tops.filter(({ top }) => top <= line);
+      const current = pool.reduce<(typeof tops)[number] | undefined>(
+        (best, entry) => (best === undefined || entry.top > best.top ? entry : best),
+        undefined
+      );
+      for (const { link } of targets) {
+        if (current?.link === link) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    };
+    const schedule = () => {
+      if (frame === 0) frame = requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    update();
+  }
+</script>

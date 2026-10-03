@@ -8,9 +8,7 @@ import { defineCV } from './src/config/define';
 export default defineCV({
   lang: 'ru',
   name: 'Иван Иванов',
-  position: 'Фронтенд-разработчик (Middle)',
-
-  photo: { src: 'photo-example.jpg', alt: 'Портрет Ивана Иванова' },
+  position: 'Фронтенд-разработчик',
 
   seo: {
     url: 'https://ivanov-dev.example.com',
@@ -23,7 +21,7 @@ export default defineCV({
     telegram: 't.me/ivanov_dev',
     github: 'github.com/ivanov-dev',
     linkedin: 'linkedin.com/in/ivanov-dev',
-    location: 'Москва, готов к удалёнке'
+    location: 'Москва'
   },
 
   about:
@@ -182,7 +180,7 @@ export default defineCV({
     sections: {
       experience: { title: 'Опыт работы', nav: 'Опыт' }
     },
-    pdfButton: 'Скачать резюме (PDF)' // false убирает кнопку
+    pdfButton: 'Скачать резюме' // false убирает кнопку
   },
 
   footer: { show: true }
