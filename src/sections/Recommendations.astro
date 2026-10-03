@@ -1,0 +1,27 @@
+---
+import type { Cv } from '../config';
+import { joinFilled } from '../lib/text';
+
+interface Props {
+  readonly cv: Cv;
+}
+
+const { cv } = Astro.props;
+const entries = (cv.recommendations ?? []).map(({ quote, author, role, company }) => ({
+  quote,
+  signature: joinFilled([author, role, company], ', ')
+}));
+---
+
+<ul class="space-y-6">
+  {entries.map(({ quote, signature }) => (
+    <li>
+      <figure>
+        <blockquote>
+          <p class="quoted">{quote}</p>
+        </blockquote>
+        <figcaption class="text-muted-foreground mt-2">{signature}</figcaption>
+      </figure>
+    </li>
+  ))}
+</ul>

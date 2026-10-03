@@ -8,6 +8,7 @@ export type DefaultLabel = {
 
 export type DefaultLabels = {
   readonly sections: Readonly<Record<LabelKey, DefaultLabel>>;
+  readonly availability: Readonly<Record<'format' | 'employment' | 'salary' | 'start', string>>;
   readonly pdfButton: string;
   readonly skipLink: string;
   readonly footerCredit: string;
@@ -32,6 +33,12 @@ export const DEFAULT_LABELS: DefaultLabels = {
     interests: { title: 'Интересы и хобби', nav: 'Интересы' },
     recommendations: { title: 'Рекомендации' },
     availability: { title: 'Доступность' }
+  },
+  availability: {
+    format: 'Формат работы',
+    employment: 'Занятость',
+    salary: 'Зарплатные ожидания',
+    start: 'Срок выхода'
   },
   pdfButton: 'Сохранить в PDF',
   skipLink: 'Перейти к содержимому',

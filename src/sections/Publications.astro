@@ -1,6 +1,6 @@
 ---
 import type { Cv } from '../config';
-import Paragraphs from '../components/Paragraphs.astro';
+import LinkList from '../components/LinkList.astro';
 
 interface Props {
   readonly cv: Cv;
@@ -9,4 +9,4 @@ interface Props {
 const { cv } = Astro.props;
 ---
 
-<Paragraphs text={cv.about ?? ''} />
+<LinkList items={cv.publications ?? []} />

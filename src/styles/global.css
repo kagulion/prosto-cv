@@ -134,6 +134,19 @@
   @apply focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground;
 }
 
+/* Кавычки цитаты по языку страницы (`<html lang>`): ставит CSS, в данных их нет. */
+@utility quoted {
+  quotes: auto;
+
+  &::before {
+    content: open-quote;
+  }
+
+  &::after {
+    content: close-quote;
+  }
+}
+
 /* Печать: резюме на бумаге без экранных отступов. Цвета остаются токенами светлой темы. */
 @page {
   margin: 15mm;

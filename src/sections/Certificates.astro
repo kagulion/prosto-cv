@@ -1,0 +1,23 @@
+---
+import type { Cv } from '../config';
+import { joinFilled } from '../lib/text';
+
+interface Props {
+  readonly cv: Cv;
+}
+
+const { cv } = Astro.props;
+const entries = (cv.certificates ?? []).map(({ title, issuer, year }) => ({
+  title,
+  details: joinFilled([issuer, year], ', ')
+}));
+---
+
+<ul class="space-y-6">
+  {entries.map(({ title, details }) => (
+    <li>
+      <h3 class="font-semibold">{title}</h3>
+      {details !== '' && <p class="text-muted-foreground">{details}</p>}
+    </li>
+  ))}
+</ul>

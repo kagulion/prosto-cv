@@ -1,0 +1,17 @@
+---
+import type { Cv } from '../config';
+import { languageLine } from '../lib/languages';
+
+interface Props {
+  readonly cv: Cv;
+}
+
+const { cv } = Astro.props;
+const lines = (cv.languages ?? []).map(languageLine);
+---
+
+<ul class="space-y-1">
+  {lines.map((line) => (
+    <li>{line}</li>
+  ))}
+</ul>

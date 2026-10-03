@@ -1,9 +1,10 @@
-import { DEFAULT_LABELS } from './defaults';
+import { DEFAULT_LABELS, type DefaultLabels } from './defaults';
 import type { Cv } from './schema';
 import { mapSectionKeys, type LabelKey } from './sections';
 
 export type ResolvedLabels = {
   readonly sections: Readonly<Record<LabelKey, { readonly title: string; readonly nav: string }>>;
+  readonly availability: DefaultLabels['availability'];
   /** `null` значит «кнопки нет» (в конфиге `pdfButton: false`). */
   readonly pdfButton: string | null;
   readonly skipLink: string;
@@ -23,6 +24,12 @@ export const resolveLabels = (cv: Cv): ResolvedLabels => ({
       nav: custom?.nav ?? custom?.title ?? fallback.nav ?? fallback.title
     };
   }),
+  availability: {
+    format: cv.labels?.availability?.format ?? DEFAULT_LABELS.availability.format,
+    employment: cv.labels?.availability?.employment ?? DEFAULT_LABELS.availability.employment,
+    salary: cv.labels?.availability?.salary ?? DEFAULT_LABELS.availability.salary,
+    start: cv.labels?.availability?.start ?? DEFAULT_LABELS.availability.start
+  },
   pdfButton:
     cv.labels?.pdfButton === false ? null : (cv.labels?.pdfButton ?? DEFAULT_LABELS.pdfButton),
   skipLink: cv.labels?.skipLink ?? DEFAULT_LABELS.skipLink,
