@@ -7,6 +7,11 @@ export default defineCV({
 
   photo: { src: 'photo-example.jpg', alt: 'Портрет Ивана Иванова' },
 
+  seo: {
+    url: 'https://ivanov-dev.example.com',
+    description: 'Фронтенд-разработчик: React, TypeScript, доступные и быстрые интерфейсы'
+  },
+
   contacts: {
     phone: '+7 999 999-99-99',
     email: 'devivanov@mail.ru',
@@ -104,13 +109,19 @@ export default defineCV({
   ],
 
   publications: [
-    'Статья «Как мы ускорили загрузку SPA на 35%», блог на Habr (2025)',
+    {
+      text: 'Статья «Как мы ускорили загрузку SPA на 35%», блог на Habr (2025)',
+      url: 'https://habr.com/ru/users/ivanov-dev/'
+    },
     'Доклад «Tailwind в продакшене: плюсы и подводные камни», внутренний митап (2025)'
   ],
 
   openSource: [
     'Несколько PR в документацию и баг-фиксы в популярных UI-библиотеках',
-    'Собственная библиотека хуков `react-tiny-hooks` (около 200 звёзд на GitHub)'
+    {
+      text: 'Собственная библиотека хуков react-tiny-hooks (около 200 звёзд на GitHub)',
+      url: 'https://github.com/ivanov-dev/react-tiny-hooks'
+    }
   ],
 
   languages: [

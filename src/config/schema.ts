@@ -102,14 +102,30 @@ const pdfButton = z
   )
   .optional();
 
+const availabilityLabels = strictObject({
+  format: optionalText,
+  employment: optionalText,
+  salary: optionalText,
+  start: optionalText
+}).optional();
+
 const labels = strictObject({
   sections: strictObject(mapSectionKeys(() => sectionLabel)).optional(),
+  availability: availabilityLabels,
   pdfButton,
   skipLink: optionalText
 }).optional();
 
 /** Фото в шапке: файл из `src/assets` и обязательное описание для читалки с экрана. */
 const photo = strictObject({ src: required, alt: required }).optional();
+
+/** SEO: заголовок и описание вместо выводимых, адрес сайта для canonical и превью, закрытие от индексации. */
+const seo = strictObject({
+  title: optionalText,
+  description: optionalText,
+  url: optionalUrl,
+  noindex: z.boolean().optional()
+}).optional();
 
 const footer = strictObject({ show: z.boolean().default(true), credit: optionalText }).default({
   show: true
@@ -122,6 +138,7 @@ export const cvSchema = strictObject({
   name: required,
   position: required,
   photo,
+  seo,
   contacts,
   ...sectionSchemas,
   labels,

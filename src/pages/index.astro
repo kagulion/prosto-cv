@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import Nav from '../components/Nav.astro';
 import Section from '../components/Section.astro';
+import SeoHead from '../components/SeoHead.astro';
 import { ConfigError, loadConfig, resolveLabels } from '../config';
 import { CONFIG_FILE } from '../config/load';
 import Layout from '../layouts/Layout.astro';
@@ -13,6 +14,7 @@ import { buildFooter } from '../lib/footer';
 import { buildNavItems } from '../lib/nav-items';
 import { buildSections } from '../lib/page-sections';
 import { PHOTO_OPTIONS, resolvePhoto, type PhotoView } from '../lib/photo';
+import { buildSeo } from '../lib/seo';
 import { SECTION_REGISTRY } from '../sections/registry';
 
 const cv = loadConfig();
@@ -40,6 +42,7 @@ const photo: PhotoView | undefined =
         height: Number(optimized.attributes.height),
         alt: photoResolution.alt
       };
+const seo = buildSeo({ cv, ...(photo === undefined ? {} : { photo }) });
 // Единственный побочный эффект страницы: год сборки читается здесь, дальше он аргумент.
 const footer = buildFooter({
   name: cv.name,
@@ -48,7 +51,8 @@ const footer = buildFooter({
 });
 ---
 
-<Layout lang={cv.lang} title={cv.name}>
+<Layout lang={cv.lang} title={seo.title}>
+  <SeoHead slot="head" seo={seo} />
   {navItems.length > 0 && (
     <a
       href="#main"
