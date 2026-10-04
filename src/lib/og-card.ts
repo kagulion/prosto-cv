@@ -5,7 +5,6 @@ import { OG_HEIGHT, OG_WIDTH } from './seo';
 export type OgCard = {
   readonly name: string;
   readonly position: string;
-  readonly host?: string;
 };
 
 /** Узел дерева satori. Текст лежит в `children` как есть, экранирование не нужно. */
@@ -19,14 +18,14 @@ export type OgNode = {
 
 const PADDING = 80;
 
-/** Карточка 1200×630: имя, должность, внизу адрес. Чистая функция, HTML не строится. */
-export const buildOgMarkup = ({ name, position, host }: OgCard): OgNode => ({
+/** Карточка 1200×630: имя и должность. Чистая функция, HTML не строится. */
+export const buildOgMarkup = ({ name, position }: OgCard): OgNode => ({
   type: 'div',
   props: {
     style: {
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       width: OG_WIDTH,
       height: OG_HEIGHT,
       padding: PADDING,
@@ -70,18 +69,6 @@ export const buildOgMarkup = ({ name, position, host }: OgCard): OgNode => ({
               }
             }
           ]
-        }
-      },
-      {
-        type: 'div',
-        props: {
-          style: {
-            display: 'flex',
-            fontSize: 28,
-            fontWeight: 400,
-            color: OG_THEME.mutedForeground
-          },
-          children: host ?? ''
         }
       }
     ]

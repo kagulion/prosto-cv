@@ -38,7 +38,7 @@ const ogLocale = (lang: string): string | undefined => {
   return match === null ? undefined : `${match[1]}_${match[2]?.toUpperCase()}`;
 };
 
-/** Всё для `<head>`: значения по умолчанию из имени, должности и локации. Чистая функция. */
+/** Всё для `<head>`: `<title>` и description по умолчанию из имени, должности и локации, а превью (og) всегда «имя» и «должность». Чистая функция. */
 export const buildSeo = ({ cv }: { readonly cv: Cv }): Seo => {
   const title = cv.seo?.title ?? joinFilled([cv.name, cv.position], ', ');
   const location = splitContacts(cv.contacts).location;
@@ -56,8 +56,8 @@ export const buildSeo = ({ cv }: { readonly cv: Cv }): Seo => {
     ...(canonical === undefined ? {} : { canonical }),
     ...(noindex ? { robots: 'noindex' as const } : {}),
     og: {
-      title,
-      description,
+      title: cv.name,
+      description: cv.position,
       type: 'website',
       ...(locale === undefined ? {} : { locale }),
       ...(canonical === undefined ? {} : { url: canonical }),

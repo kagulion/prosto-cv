@@ -6,7 +6,6 @@ import { loadConfig } from '../config';
 import { buildOgMarkup } from '../lib/og-card';
 import { loadOgFonts } from '../lib/og-fonts';
 import { OG_HEIGHT, OG_WIDTH } from '../lib/seo';
-import { displayUrl } from '../lib/links';
 
 // Край: единственное место, где читаются шрифты и рисуется картинка.
 const pngResponse = (png: Uint8Array<ArrayBuffer>) =>
@@ -22,8 +21,7 @@ export const GET: APIRoute = async () => {
   }
   const markup = buildOgMarkup({
     name: cv.name,
-    position: cv.position,
-    ...(cv.seo?.url === undefined ? {} : { host: displayUrl(cv.seo.url) })
+    position: cv.position
   });
   // Дерево объектов satori совместимо по форме с ReactNode, но тип пакета его не принимает.
   const svg = await satori(markup as unknown as Parameters<typeof satori>[0], {
