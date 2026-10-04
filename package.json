@@ -23,11 +23,11 @@
     "@fontsource-variable/geist": "^5.3.0",
     "@fontsource/geist": "^5.3.0",
     "@iconify-json/fa6-brands": "^1.2.6",
-    "@lucide/astro": "^1.49.0",
+    "@lucide/astro": "^1.51.0",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.5",
-    "satori": "^0.33.5",
+    "satori": "^0.35.0",
     "satori-html": "^0.3.2",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3"

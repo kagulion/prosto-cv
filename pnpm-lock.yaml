@@ -193,6 +193,10 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  http-cache-semantics: '>=4.3.0'
+  fflate: '>=0.7.5'
+
 importers:
 
   .:
@@ -207,8 +211,8 @@ importers:
         specifier: ^1.2.6
         version: 1.2.6
       '@lucide/astro':
-        specifier: ^1.49.0
-        version: 1.49.0(astro@7.3.5(@types/node@26.6.4)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: ^1.51.0
+        version: 1.51.0(astro@7.3.5(@types/node@26.6.4)(jiti@2.7.0)(yaml@2.9.1))
       '@resvg/resvg-js':
         specifier: ^2.6.2
         version: 2.6.2
@@ -219,8 +223,8 @@ importers:
         specifier: ^7.3.5
         version: 7.3.5(@types/node@26.6.4)(jiti@2.7.0)(yaml@2.9.1)
       satori:
-        specifier: ^0.33.5
-        version: 0.33.5
+        specifier: ^0.35.0
+        version: 0.35.0
       satori-html:
         specifier: ^0.3.2
         version: 0.3.2
@@ -982,8 +986,8 @@ packages:
   '@keyv/serialize@1.1.1':
     resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
 
-  '@lucide/astro@1.49.0':
-    resolution: {integrity: sha512-hBLw14Mou0Or1KmAIiC3W3XW9HVNIFIAY6j++uVe3QLTPzByJ4RwhCvatdUyCJrgNObY6lv/Skm2XMqRsS4c+A==}
+  '@lucide/astro@1.51.0':
+    resolution: {integrity: sha512-tZkfwLj/4FFnkCNxRywfmj7r8XrZwpPMVQS1ud1U7y5IVXBnz+mxCnmEk/ZXbc7JiQZAnz0C3CAiVBZs/eh+QQ==}
     peerDependencies:
       astro: ^4 || ^5 || ^6 || ^7
 
@@ -1828,8 +1832,8 @@ packages:
       picomatch:
         optional: true
 
-  fflate@0.7.3:
-    resolution: {integrity: sha512-0Zz1jOzJWERhyhsimS54VTqOteCNwRtIlh8isdL0AXLo0g7xNTfTL7oWrkmCnPhZGocKIkWHBistBrrpoNH3aw==}
+  fflate@0.8.3:
+    resolution: {integrity: sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==}
 
   file-entry-cache@11.1.5:
     resolution: {integrity: sha512-+PFTHITI08JIGhnNpGNI8T8inUpgZfk3GNEqfT9R2zZV2iFXg3CvqzSl/uEhs7TSGujYRELEANyDvS8Fj7+S7Q==}
@@ -1926,8 +1930,8 @@ packages:
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
 
-  http-cache-semantics@4.2.0:
-    resolution: {integrity: sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ==}
+  http-cache-semantics@4.3.0:
+    resolution: {integrity: sha512-M5t5LlJpS1UHMjvwRQVdFHvPISGeLAxNcrWuJkeGh0KxsqCHZ1O3NXZU/8x7cD0BDcGW8kapxMKTvwlqrNkHkA==}
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
@@ -2457,8 +2461,8 @@ packages:
   satori-html@0.3.2:
     resolution: {integrity: sha512-wjTh14iqADFKDK80e51/98MplTGfxz2RmIzh0GqShlf4a67+BooLywF17TvJPD6phO0Hxm7Mf1N5LtRYvdkYRA==}
 
-  satori@0.33.5:
-    resolution: {integrity: sha512-PNW6ktrQ8SM6kk7u4aOuTkkUewkzyTOrj+QeEzXSsnNMAdff4ire9CAqIz8+4C3rCiBtK8QTELv52AZEd1PbRw==}
+  satori@0.35.0:
+    resolution: {integrity: sha512-YyoP7axF2T93XOWXQXLH4t+cvLgZ+MeYV/xruXJfPa/czpcRqaG41/8Bz3mzgYj/7NxdrqJOx3YtzWy1MLtG5g==}
     engines: {node: '>=16'}
 
   satteri@0.10.5:
@@ -3521,7 +3525,7 @@ snapshots:
 
   '@keyv/serialize@1.1.1': {}
 
-  '@lucide/astro@1.49.0(astro@7.3.5(@types/node@26.6.4)(jiti@2.7.0)(yaml@2.9.1))':
+  '@lucide/astro@1.51.0(astro@7.3.5(@types/node@26.6.4)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
       astro: 7.3.5(@types/node@26.6.4)(jiti@2.7.0)(yaml@2.9.1)
 
@@ -3686,7 +3690,7 @@ snapshots:
 
   '@shuding/opentype.js@1.4.0-beta.0':
     dependencies:
-      fflate: 0.7.3
+      fflate: 0.8.3
       string.prototype.codepointat: 0.2.1
 
   '@tailwindcss/node@4.3.3':
@@ -4024,7 +4028,7 @@ snapshots:
       get-tsconfig: 5.0.0-beta.4
       github-slugger: 2.0.0
       html-escaper: 3.0.3
-      http-cache-semantics: 4.2.0
+      http-cache-semantics: 4.3.0
       js-yaml: 4.3.2
       jsonc-parser: 3.3.1
       magic-string: 1.4.2
@@ -4403,7 +4407,7 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.7
 
-  fflate@0.7.3: {}
+  fflate@0.8.3: {}
 
   file-entry-cache@11.1.5:
     dependencies:
@@ -4504,7 +4508,7 @@ snapshots:
 
   html-void-elements@3.0.0: {}
 
-  http-cache-semantics@4.2.0: {}
+  http-cache-semantics@4.3.0: {}
 
   ignore@5.3.2: {}
 
@@ -4914,7 +4918,7 @@ snapshots:
     dependencies:
       ultrahtml: 1.7.0
 
-  satori@0.33.5:
+  satori@0.35.0:
     dependencies:
       '@shuding/opentype.js': 1.4.0-beta.0
       css-background-parser: 0.1.0
@@ -4923,7 +4927,7 @@ snapshots:
       css-to-react-native: 3.2.0
       emoji-regex-xs: 2.0.1
       escape-html: 1.0.3
-      fflate: 0.7.3
+      fflate: 0.8.3
       harfbuzzjs: 0.10.0
       linebreak: 1.1.0
       parse-css-color: 0.2.1
