@@ -56,18 +56,18 @@ const titleId = `${CONTACTS_ID}-title`;
     <h2 id={titleId} class="sr-only">
       {contactsTitle}
     </h2>
-    <ul class="flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap print:gap-x-6 print:gap-y-2">
+    <ul class="flex flex-row flex-wrap items-start gap-2 print:gap-x-6 print:gap-y-2">
       {contacts.map(({ kind, display, href }) => (
         <li class="max-w-full min-w-0 wrap-anywhere">
           <a
-            class="icon-button max-sm:h-auto max-sm:min-h-10 max-sm:justify-start max-sm:gap-2 max-sm:px-3.5 max-sm:py-2"
+            class="icon-button"
             href={href}
             title={display}
           >
             <span class="inline-flex print:hidden">
               <ContactIcon kind={kind} />
             </span>
-            <span class="sr-only max-sm:not-sr-only max-sm:min-w-0 max-sm:text-sm print:not-sr-only">
+            <span class="sr-only print:not-sr-only">
               {display}
             </span>
           </a>
