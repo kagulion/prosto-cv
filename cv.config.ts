@@ -7,68 +7,70 @@ import { defineCV } from './src/config/define';
  */
 export default defineCV({
   lang: 'ru',
-  name: 'Иван Иванов',
+  name: 'Алексей Кузнецов',
   position: 'Фронтенд-разработчик',
 
   seo: {
-    url: 'https://ivanov-dev.example.com',
-    description: 'Фронтенд-разработчик: React, TypeScript, доступные и быстрые интерфейсы'
+    url: 'https://kuznetsov.example.com',
+    description: 'Алексей Кузнецов, фронтенд-разработчик: React, TypeScript, производительность и доступность интерфейсов'
   },
 
   contacts: {
-    phone: '+7 999 999-99-99',
-    email: 'devivanov@mail.ru',
-    telegram: 't.me/ivanov_dev',
-    github: 'github.com/ivanov-dev',
-    linkedin: 'linkedin.com/in/ivanov-dev',
-    location: 'Москва'
+    phone: '+7 916 482-17-35',
+    email: 'alexey.kuznetsov@proton.me',
+    telegram: 't.me/akuznetsov_dev',
+    github: 'github.com/akuznetsov-dev',
+    linkedin: 'linkedin.com/in/akuznetsov-dev',
+    location: 'Санкт-Петербург'
   },
 
   about:
-    'Фронтенд-разработчик с 3,5 годами опыта. Делаю SPA и корпоративные веб-приложения на React и TypeScript. ' +
-    'Внимателен к производительности, доступности и аккуратной вёрстке. Люблю превращать макеты в ' +
-    'поддерживаемые интерфейсы и работать в тесной связке с дизайнерами и бэкенд-командой.',
+    'Фронтенд-разработчик с 3,5 годами опыта в продуктовой разработке. Делаю личные кабинеты и ' +
+    'внутренние сервисы на React и TypeScript: от разбора макетов до выката и мониторинга. ' +
+    'Слежу за производительностью и доступностью, люблю аккуратный код и понятные интерфейсы. ' +
+    'Привык работать в одной команде с дизайнерами, бэкендерами и QA.',
 
   experience: [
     {
       position: 'Фронтенд-разработчик',
-      company: 'ООО «Техносфера»',
+      company: 'ООО «Модуль Финтех»',
       period: 'июнь 2024 — н. в.',
       bullets: [
-        'Разрабатываю личный кабинет клиентов на React + TypeScript',
-        'Сократил время первой загрузки на 35% (code splitting, lazy loading, оптимизация изображений)',
-        'Внедрил дизайн-систему на Tailwind, ускорив вёрстку новых страниц',
-        'Провожу code review и менторю двух джунов'
+        'Развиваю личный кабинет для малого бизнеса (платежи, выписки, документы) на React и TypeScript',
+        'Сократил время загрузки главной страницы кабинета с 4,2 до 2,1 с: code splitting, ленивая загрузка, оптимизация изображений и шрифтов',
+        'Вместе с дизайнером собрал библиотеку UI-компонентов на Tailwind и Storybook, которой пользуются три команды',
+        'Настроил в CI проверки линтером, типами и тестами, число регрессий после релизов заметно снизилось',
+        'Провожу code review и помогаю адаптироваться двум джуниор-разработчикам'
       ]
     },
     {
       position: 'Junior фронтенд-разработчик',
-      company: '«ВебСтудия Пиксель»',
+      company: 'Студия «Пиксель Форж»',
       period: 'март 2023 — май 2024',
       bullets: [
-        'Верстал адаптивные сайты и лендинги для клиентов',
-        'Подключал REST API и настраивал сборку на Vite',
-        'Покрыл тестами ключевые компоненты (Jest + Testing Library)'
+        'Верстал адаптивные сайты и интернет-магазины на заказ, всего около 15 проектов',
+        'Подключал REST API, настраивал сборку на Vite и деплой через GitHub Actions',
+        'Покрыл тестами ключевые компоненты (Jest и Testing Library), перевёл часть проектов на TypeScript'
       ]
     }
   ],
 
   projects: [
     {
-      name: 'Личный кабинет «Техносфера»',
-      description: 'Клиентский портал',
+      name: 'Личный кабинет «Модуль Бизнес»',
+      description: 'Платежи, выписки и документы для малого бизнеса',
       tech: ['React', 'TypeScript', 'Redux Toolkit', 'Tailwind']
     },
     {
-      name: 'Трекер задач',
-      description: 'Канбан-доска с drag-and-drop',
-      tech: ['React', 'Zustand', 'Vite']
+      name: 'Планировщик задач',
+      description: 'Канбан-доска с drag-and-drop и офлайн-режимом',
+      tech: ['React', 'Zustand', 'Vite', 'IndexedDB']
     },
     {
-      name: 'Генератор CV',
-      url: 'https://example.com/prosto-cv',
-      description: 'Одностраничный сайт-резюме из конфига',
-      tech: ['Astro', 'TypeScript', 'Tailwind']
+      name: 'react-tiny-hooks',
+      url: 'https://github.com/akuznetsov-dev/react-tiny-hooks',
+      description: 'Небольшая библиотека хуков для React',
+      tech: ['TypeScript', 'React', 'Vitest']
     }
   ],
 
@@ -91,7 +93,7 @@ export default defineCV({
 
   education: [
     {
-      institution: 'Московский технический университет',
+      institution: 'Санкт-Петербургский политехнический университет',
       degree: 'бакалавр',
       field: 'Прикладная информатика',
       period: '2018–2022'
@@ -105,15 +107,15 @@ export default defineCV({
   ],
 
   achievements: [
-    'Призёр внутреннего хакатона «Техносферы» (2025)',
-    'Снижение LCP с 4,2 с до 2,1 с на главной странице продукта',
-    'Благодарность от команды за внедрение дизайн-системы'
+    'Призёр внутреннего хакатона «Модуль Финтех» (2025)',
+    'Снижение LCP с 4,2 с до 2,1 с на главной странице личного кабинета',
+    'Благодарность от команды за внедрение библиотеки UI-компонентов'
   ],
 
   publications: [
     {
-      text: 'Статья «Как мы ускорили загрузку SPA на 35%», блог на Habr (2025)',
-      url: 'https://habr.com/ru/users/ivanov-dev/'
+      text: 'Статья «Как мы ускорили загрузку SPA вдвое», блог на Habr (2025)',
+      url: 'https://habr.com/ru/users/akuznetsov-dev/'
     },
     'Доклад «Tailwind в продакшене: плюсы и подводные камни», внутренний митап (2025)'
   ],
@@ -121,8 +123,8 @@ export default defineCV({
   openSource: [
     'Несколько PR в документацию и баг-фиксы в популярных UI-библиотеках',
     {
-      text: 'Собственная библиотека хуков react-tiny-hooks (около 200 звёзд на GitHub)',
-      url: 'https://github.com/ivanov-dev/react-tiny-hooks'
+      text: 'Библиотека хуков react-tiny-hooks (около 200 звёзд на GitHub)',
+      url: 'https://github.com/akuznetsov-dev/react-tiny-hooks'
     }
   ],
 
@@ -143,8 +145,7 @@ export default defineCV({
     'Chrome DevTools',
     'Lighthouse',
     'Jira',
-    'VS Code',
-    'Windows 10'
+    'VS Code'
   ],
 
   volunteering:
@@ -155,16 +156,16 @@ export default defineCV({
   recommendations: [
     {
       quote:
-        'Иван быстро вникает в задачу и всегда доводит её до конца. С ним удобно работать над сложными интерфейсами',
+        'Алексей быстро вникает в задачу и всегда доводит её до конца. С ним удобно работать над сложными интерфейсами',
       author: 'Анна Смирнова',
       role: 'Lead Designer',
-      company: 'Техносфера'
+      company: 'Модуль Финтех'
     },
     {
       quote: 'Надёжный разработчик, хорошо объясняет технические решения',
       author: 'Дмитрий Орлов',
       role: 'Tech Lead',
-      company: 'Техносфера'
+      company: 'Модуль Финтех'
     }
   ],
 
