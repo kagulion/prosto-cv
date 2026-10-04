@@ -11,6 +11,7 @@ export type DefaultLabels = {
   readonly availability: Readonly<Record<'format' | 'employment' | 'salary' | 'start', string>>;
   readonly pdfButton: string;
   readonly skipLink: string;
+  readonly navLabel: string;
   readonly footerCredit: string;
 };
 
@@ -42,5 +43,6 @@ export const DEFAULT_LABELS: DefaultLabels = {
   },
   pdfButton: 'PDF',
   skipLink: 'Перейти к содержимому',
+  navLabel: 'Содержание',
   footerCredit: 'Prosto CV'
 };

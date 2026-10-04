@@ -13,7 +13,9 @@ const places = cv.experience ?? [];
   {places.map(({ position, company, period, bullets }) => (
     <li class="reveal">
       <div class="flex flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-        <h3 class="min-w-0 text-base leading-snug font-medium tracking-tight text-balance">{position}</h3>
+        <h3 class="min-w-0 text-base leading-snug font-medium tracking-tight text-balance">
+          {position}
+        </h3>
         <p class="text-muted-foreground text-xs tabular-nums text-balance sm:max-w-[34%] sm:shrink-0 sm:text-right">
           {period}
         </p>

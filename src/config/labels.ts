@@ -8,6 +8,7 @@ export type ResolvedLabels = {
   /** `null` значит «кнопки нет» (в конфиге `labels.pdfButton: false`). Подпись всегда из `DEFAULT_LABELS`. */
   readonly pdfButton: string | null;
   readonly skipLink: string;
+  readonly navLabel: string;
   readonly footerCredit: string;
 };
 
@@ -32,5 +33,6 @@ export const resolveLabels = (cv: Cv): ResolvedLabels => ({
   },
   pdfButton: cv.labels?.pdfButton === false ? null : DEFAULT_LABELS.pdfButton,
   skipLink: cv.labels?.skipLink ?? DEFAULT_LABELS.skipLink,
+  navLabel: cv.labels?.navLabel ?? DEFAULT_LABELS.navLabel,
   footerCredit: cv.footer.credit ?? DEFAULT_LABELS.footerCredit
 });

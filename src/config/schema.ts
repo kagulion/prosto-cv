@@ -108,7 +108,8 @@ const labels = strictObject({
   sections: strictObject(mapSectionKeys(() => sectionLabel)).optional(),
   availability: availabilityLabels,
   pdfButton,
-  skipLink: optionalText
+  skipLink: optionalText,
+  navLabel: optionalText
 }).optional();
 
 /** SEO: заголовок и описание вместо выводимых, адрес сайта для canonical и превью, закрытие от индексации. */

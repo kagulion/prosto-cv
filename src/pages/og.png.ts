@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises';
 import { Resvg } from '@resvg/resvg-js';
 import type { APIRoute } from 'astro';
 import satori from 'satori';
@@ -8,10 +9,17 @@ import { OG_HEIGHT, OG_WIDTH } from '../lib/seo';
 import { displayUrl } from '../lib/links';
 
 // Край: единственное место, где читаются шрифты и рисуется картинка.
+const pngResponse = (png: Uint8Array<ArrayBuffer>) =>
+  new Response(png, { headers: { 'Content-Type': 'image/png' } });
+
 export const GET: APIRoute = async () => {
   const cv = loadConfig();
   const fonts = await loadOgFonts();
-  if (!fonts.ok) throw new Error(fonts.message);
+  if (!fonts.ok) {
+    // Нет шрифтов: вместо падения сборки отдаём заготовку и говорим об этом.
+    console.warn(`og.png: ${fonts.message}. Использована заготовка src/assets/og.png.`);
+    return pngResponse(new Uint8Array(await readFile('src/assets/og.png')));
+  }
   const markup = buildOgMarkup({
     name: cv.name,
     position: cv.position,
@@ -24,5 +32,5 @@ export const GET: APIRoute = async () => {
     fonts: [...fonts.fonts]
   });
   const png = new Resvg(svg, { fitTo: { mode: 'width', value: OG_WIDTH } }).render().asPng();
-  return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
+  return pngResponse(new Uint8Array(png));
 };

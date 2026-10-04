@@ -26,4 +26,5 @@ const { og } = seo;
   </>
 )}
 {seo.twitterCard !== undefined && <meta name="twitter:card" content={seo.twitterCard} />}
+{og.image !== undefined && <meta name="twitter:image" content={og.image.url} />}
 {seo.jsonLd !== undefined && <script type="application/ld+json" set:html={seo.jsonLd} />}

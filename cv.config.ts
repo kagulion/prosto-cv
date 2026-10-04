@@ -12,7 +12,8 @@ export default defineCV({
 
   seo: {
     url: 'https://kuznetsov.example.com',
-    description: 'Алексей Кузнецов, фронтенд-разработчик: React, TypeScript, производительность и доступность интерфейсов'
+    description:
+      'Алексей Кузнецов, фронтенд-разработчик: React, TypeScript, производительность и доступность интерфейсов'
   },
 
   contacts: {
