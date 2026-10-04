@@ -1,11 +1,10 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/geist';
-@import '@fontsource-variable/source-serif-4';
 
 @custom-variant dark (&:is(.dark, .dark *));
 
 :root {
-  --background: oklch(0.985 0 0);
+  --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -75,7 +74,6 @@
 
 @theme inline {
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -162,26 +160,35 @@
 }
 
 /*
- * Иконка-контакт в шапке: квадрат с лёгкой обводкой. В печати иконки скрыты и остаётся
- * текст контакта, поэтому рамка и размер сбрасываются.
+ * Иконка-контакт в шапке: серая плашка без обводки. В печати иконки скрыты и остаётся
+ * текст контакта, поэтому фон и размер сбрасываются.
  */
 @utility icon-chip {
-  @apply inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-border text-foreground;
+  @apply inline-flex h-10 min-w-10 items-center justify-center rounded-xl bg-secondary text-foreground;
 
   @media print {
-    @apply h-auto min-w-0 rounded-none border-0;
+    @apply h-auto min-w-0 rounded-none bg-transparent;
   }
 }
 
-/* Кликабельная иконка: фокус как у `link`, нажатие как у кнопки печати. */
+/*
+ * Кликабельная иконка: фокус как у `link`, нажатие как у кнопки печати. На hover появляется
+ * обводка (inset-тенью, чтобы не сдвигать вёрстку) и лёгкий подъём через `translate`.
+ */
 @utility icon-button {
   @apply icon-chip;
-  @apply transition-[transform,background-color] duration-150 ease-out active:scale-[0.97];
+  @apply transition-[transform,translate,background-color,box-shadow] duration-150 ease-out active:scale-[0.97];
   @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      @apply bg-accent;
+      @apply bg-accent shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--foreground)_15%,transparent)];
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      &:hover {
+        translate: 0 -2px;
+      }
     }
   }
 }
@@ -211,6 +218,46 @@
       animation-timeline: view();
       animation-range: entry 0% entry 35%;
     }
+
+    /*
+     * Секции, уже попавшие в экран при загрузке, scroll-driven анимация не двигает: они сразу
+     * в конце диапазона. Поэтому поверх неё идёт короткое появление по времени с каскадом после
+     * шапки. Оно последнее в списке, значит перекрывает scroll-driven, пока играет, а потом
+     * (без fill-mode forwards) отдаёт управление ей. Секции ниже экрана этого не видят.
+     */
+    main > .reveal {
+      animation:
+        rise-in linear both,
+        rise-in 360ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+      animation-timeline: view(), auto;
+      animation-range:
+        entry 0% entry 35%,
+        normal;
+      animation-delay: 0s, calc(min(var(--i, 3), 6) * 60ms);
+    }
+  }
+
+  @supports not (animation-timeline: view()) {
+    main > .reveal {
+      animation: rise-in 360ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+      animation-delay: calc(min(var(--i, 3), 6) * 60ms);
+    }
+  }
+
+  main > .reveal:nth-of-type(1) {
+    --i: 3;
+  }
+
+  main > .reveal:nth-of-type(2) {
+    --i: 4;
+  }
+
+  main > .reveal:nth-of-type(3) {
+    --i: 5;
+  }
+
+  main > .reveal:nth-of-type(n + 4) {
+    --i: 6;
   }
 }
 

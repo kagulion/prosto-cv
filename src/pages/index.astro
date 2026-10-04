@@ -20,7 +20,7 @@ const devMode = dev?.readMode(process.env['CV_DEV_DATA'] ?? null);
 const cv = dev !== undefined && devMode !== undefined ? dev.pickConfig(devMode) : loadConfig();
 const labels = resolveLabels(cv);
 const sections = buildSections(cv, labels, SECTION_REGISTRY);
-const navItems = buildNavItems(sections, labels);
+const navItems = buildNavItems(sections);
 // Локация не иконка-контакт: она идёт текстом под специализацией.
 const { links: contacts, location } = splitContacts(cv.contacts);
 const seo = buildSeo({ cv });

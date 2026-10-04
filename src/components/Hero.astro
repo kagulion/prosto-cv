@@ -25,13 +25,16 @@ const titleId = `${CONTACTS_ID}-title`;
 <header class="pt-12 sm:pt-16 print:py-4">
   <div class="flex items-start justify-between gap-4 sm:gap-6">
     <div class="min-w-0">
-      <div class="enter font-serif font-normal tracking-tight">
+      <div class="enter font-normal tracking-tight">
         <h1 class="text-2xl font-medium">{name}</h1>
-        <p class="mt-0.5 flex flex-col text-lg sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-4">
+        <p class="text-muted-foreground mt-0.5 flex flex-col text-base sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-4">
           <span>{position}</span>
           {location !== undefined && (
             <span class="sm:flex sm:items-baseline sm:gap-x-4">
-              <span aria-hidden="true" class="hidden size-1 self-center bg-current sm:inline-block" />
+              <span
+                aria-hidden="true"
+                class="hidden size-[3px] self-center bg-current sm:inline-block"
+              />
               {location}
             </span>
           )}
@@ -40,7 +43,7 @@ const titleId = `${CONTACTS_ID}-title`;
       {paragraphs.length > 0 && (
         <div
           style="--i: 1"
-          class="enter mt-14 space-y-4 font-serif print:mt-7 text-lg leading-relaxed text-pretty"
+          class="enter mt-8 space-y-4 print:mt-4 text-base leading-relaxed text-pretty"
         >
           {paragraphs.map((paragraph) => (
             <p>{paragraph}</p>
@@ -49,7 +52,7 @@ const titleId = `${CONTACTS_ID}-title`;
       )}
     </div>
   </div>
-  <section id={CONTACTS_ID} aria-labelledby={titleId} class="enter mt-14 print:mt-7" style="--i: 2">
+  <section id={CONTACTS_ID} aria-labelledby={titleId} class="enter mt-8 print:mt-4" style="--i: 2">
     <h2 id={titleId} class="sr-only">
       {contactsTitle}
     </h2>
@@ -57,7 +60,7 @@ const titleId = `${CONTACTS_ID}-title`;
       {contacts.map(({ kind, display, href }) => (
         <li class="max-w-full min-w-0 wrap-anywhere" title={display}>
           <a
-            class="icon-button max-sm:h-auto max-sm:min-h-9 max-sm:justify-start max-sm:gap-2 max-sm:px-2.5 max-sm:py-1.5"
+            class="icon-button max-sm:h-auto max-sm:min-h-10 max-sm:justify-start max-sm:gap-2 max-sm:px-3.5 max-sm:py-2"
             href={href}
           >
             <span class="inline-flex print:hidden">
