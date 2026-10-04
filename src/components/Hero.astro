@@ -59,17 +59,11 @@ const titleId = `${CONTACTS_ID}-title`;
     <ul class="flex flex-row flex-wrap items-start gap-2 print:gap-x-6 print:gap-y-2">
       {contacts.map(({ kind, display, href }) => (
         <li class="max-w-full min-w-0 wrap-anywhere">
-          <a
-            class="icon-button"
-            href={href}
-            title={display}
-          >
+          <a class="icon-button" href={href} title={display}>
             <span class="inline-flex print:hidden">
               <ContactIcon kind={kind} />
             </span>
-            <span class="sr-only print:not-sr-only">
-              {display}
-            </span>
+            <span class="sr-only print:not-sr-only">{display}</span>
           </a>
         </li>
       ))}

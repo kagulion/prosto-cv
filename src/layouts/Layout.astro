@@ -22,7 +22,10 @@ const { lang, title } = Astro.props;
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href={favicon.src} />
     <meta name="theme-color" content={THEME_COLOR} />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/apple-touch-icon.png`}
+    />
     <link rel="preload" as="font" type="font/woff2" href={latinFont} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={cyrillicFont} crossorigin />
     <slot name="head" />

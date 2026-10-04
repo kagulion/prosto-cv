@@ -24,6 +24,8 @@ const devDataMode = () => ({
 });
 
 export default defineConfig({
+  // На GitHub Pages сайт лежит в подпапке репозитория, путь задаёт CI.
+  base: process.env.BASE_PATH ?? '/',
   server: {
     host: '127.0.0.1'
   },
