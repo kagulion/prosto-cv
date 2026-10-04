@@ -2,7 +2,6 @@
 import type { Cv } from '../config';
 import ArrowUpRight from '@lucide/astro/icons/arrow-up-right';
 import TagList from '../components/TagList.astro';
-import { displayUrl } from '../lib/links';
 
 interface Props {
   readonly cv: Cv;
@@ -27,7 +26,6 @@ const projects = cv.projects ?? [];
               {name}
             </a>
             <ArrowUpRight class="project-arrow size-4 shrink-0 print:hidden" aria-hidden="true" />
-            <span class="hidden wrap-anywhere print:inline"> ({displayUrl(url)})</span>
           </>
         ) : (
           name
