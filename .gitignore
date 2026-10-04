@@ -15,5 +15,5 @@ Thumbs.db
 .env.*
 !.env.example
 
-# AI
+# Local docs
 docs/
