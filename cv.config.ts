@@ -11,7 +11,7 @@ export default defineCV({
   position: 'Фронтенд-разработчик',
 
   seo: {
-    url: 'https://kuznetsov.example.com',
+    url: 'https://prosto-cv.kagulion.workers.dev',
     description:
       'Алексей Кузнецов, фронтенд-разработчик: React, TypeScript, производительность и доступность интерфейсов'
   },
