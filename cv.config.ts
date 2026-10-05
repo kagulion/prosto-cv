@@ -22,6 +22,8 @@ export default defineCV({
     telegram: 't.me/akuznetsov_dev',
     github: 'github.com/akuznetsov-dev',
     linkedin: 'linkedin.com/in/akuznetsov-dev',
+    // Любые другие ссылки: иконка подбирается по домену, `icon` и `label` задают её вручную.
+    links: ['behance.net/akuznetsov', { url: 'https://akuznetsov.dev', label: 'Личный сайт' }],
     location: 'Санкт-Петербург'
   },
 

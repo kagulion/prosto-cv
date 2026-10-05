@@ -1,5 +1,6 @@
 import { z } from 'astro/zod';
-import { text } from './fields';
+import { optionalText, required, strictObject, text } from './fields';
+import { detectIcon, GENERIC_ICON, isKnownIcon } from './link-icons';
 
 export const LINK_KINDS = ['phone', 'email', 'telegram', 'github', 'linkedin'] as const;
 export type LinkKind = (typeof LINK_KINDS)[number];
@@ -101,6 +102,61 @@ const emptyAsMissing = text.transform((value) => (value === '' ? undefined : val
 /** Контакт в конфиге: пустая строка значит «контакта нет». */
 export const optionalLink = (kind: LinkKind) =>
   emptyAsMissing.pipe(linkSchema(kind).optional()).optional();
+
+/** Произвольная ссылка: `ContactLink` плюс имя иконки (бренд из FA6 или `link`). */
+export type CustomLink = ContactLink & { readonly icon: string };
+
+const SCHEME = /^[a-z][a-z\d+.-]*:/i;
+
+const normalizeCustom = (
+  url: string,
+  icon?: string,
+  label?: string
+): { readonly message: string } | CustomLink => {
+  let parsed: URL;
+  try {
+    parsed = new URL(SCHEME.test(url) ? url : `https://${url}`);
+  } catch {
+    return { message: 'ожидалась ссылка вида https://example.com/profile' };
+  }
+  if (!/^https?:$/.test(parsed.protocol) || !parsed.hostname.includes('.')) {
+    return { message: 'ожидалась ссылка вида https://example.com/profile (только http и https)' };
+  }
+  const name = icon?.toLowerCase();
+  if (name !== undefined && !isKnownIcon(name)) {
+    return {
+      message: `неизвестная иконка «${icon}»: укажите имя из Font Awesome Brands (например behance) или ${GENERIC_ICON}`
+    };
+  }
+  const shown = `${parsed.hostname.replace(/^www\./, '')}${parsed.pathname}`.replace(/\/$/, '');
+  return {
+    display: label ?? shown,
+    href: parsed.href,
+    icon: name ?? detectIcon(parsed.hostname)
+  };
+};
+
+/**
+ * Любая ссылка в контактах: строка (`'behance.net/ivanov'`) или `{ url, icon?, label? }`.
+ * Иконка определяется по домену, `icon` задаёт её вручную, `label` подпись вместо адреса.
+ */
+const customLinkSchema = z
+  .union(
+    [
+      text.min(1, 'не может быть пустым'),
+      strictObject({ url: required, icon: optionalText, label: optionalText })
+    ],
+    'ожидалась строка или объект { url, icon, label }'
+  )
+  .transform((item, ctx): CustomLink => {
+    const input = typeof item === 'string' ? { url: item } : item;
+    const result = normalizeCustom(input.url, input.icon || undefined, input.label || undefined);
+    if (!('message' in result)) return result;
+    ctx.issues.push({ code: 'custom', message: result.message, input: input.url });
+    return z.NEVER;
+  });
+
+export const customLinks = z.array(customLinkSchema).optional();
 
 /** Локация: просто текст, без ссылки. */
 export const optionalLocation = text

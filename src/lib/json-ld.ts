@@ -1,7 +1,7 @@
 import type { Cv } from '../config';
 import { buildContactLinks } from './contact-links';
 
-const SAME_AS_KINDS: readonly string[] = ['telegram', 'github', 'linkedin'];
+const SAME_AS_KINDS: readonly string[] = ['telegram', 'github', 'linkedin', 'link'];
 
 export type PersonJsonLd = {
   readonly '@context': 'https://schema.org';

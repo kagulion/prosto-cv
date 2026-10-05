@@ -58,7 +58,7 @@
 | `lang`                                       | Язык страницы, например `ru` или `en`                                                                 |
 | `name`, `position`                           | Имя и должность в шапке (обязательно)                                                                 |
 | `seo`                                        | Адрес сайта, описание для поиска, заголовок вкладки, `noindex`                                        |
-| `contacts`                                   | `phone`, `email`, `telegram`, `github`, `linkedin`, `location`                                        |
+| `contacts`                                   | `phone`, `email`, `telegram`, `github`, `linkedin`, `links`, `location`                               |
 | `about`                                      | Текст о себе (обязательно)                                                                            |
 | `experience`                                 | Места работы: `position`, `company`, `period`, `bullets`                                              |
 | `projects`                                   | Проекты: `name`, `description`, `tech`, `url`                                                         |
@@ -85,6 +85,22 @@
 - `github: 'github.com/ivanov-dev'` или просто `'ivanov-dev'`
 - `phone: '+7 999 999-99-99'` превратится в ссылку `tel:`
 - `email` станет ссылкой `mailto:`
+
+### Любые другие ссылки
+
+В `links` можно добавить любой сайт: Behance, YouTube, личный блог. Каждая ссылка это строка или объект:
+
+```ts
+links: [
+  'behance.net/ivanov', // иконка Behance подберётся по домену
+  { url: 'https://ivanov.dev', label: 'Блог' }, // неизвестный сайт получит иконку «ссылка»
+  { url: 'https://example.com/me', icon: 'mastodon' } // иконку можно задать вручную
+];
+```
+
+- `icon` это имя бренда из [Font Awesome Brands](https://fontawesome.com/search?ic=brands) (`behance`, `youtube`, `x-twitter`) или `link`. Без него иконка определяется по домену.
+- `label` подпись, которая показывается при печати и в подсказке. Без неё берётся адрес без `https://`.
+- Допустимы только `http` и `https`. Иконки лежат в проекте, во время сборки ничего не скачивается.
 
 ## PDF
 

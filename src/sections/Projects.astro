@@ -22,7 +22,12 @@ const projects = cv.projects ?? [];
       <h3 class="flex items-start justify-between gap-2 text-base leading-snug font-medium tracking-tight">
         {url !== undefined ? (
           <>
-            <a href={url} class="outline-none after:absolute after:inset-0 after:rounded-lg">
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="outline-none after:absolute after:inset-0 after:rounded-lg"
+            >
               {name}
             </a>
             <ArrowUpRight class="project-arrow size-4 shrink-0 print:hidden" aria-hidden="true" />

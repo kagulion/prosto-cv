@@ -1,5 +1,5 @@
 import { z } from 'astro/zod';
-import { optionalLink, optionalLocation } from './contacts';
+import { customLinks, optionalLink, optionalLocation } from './contacts';
 import {
   filled,
   list,
@@ -20,11 +20,13 @@ const contacts = strictObject({
   telegram: optionalLink('telegram'),
   github: optionalLink('github'),
   linkedin: optionalLink('linkedin'),
+  links: customLinks,
   location: optionalLocation
 }).refine(
-  ({ phone, email, telegram, github, linkedin }) =>
-    [phone, email, telegram, github, linkedin].some((contact) => contact !== undefined),
-  { error: 'нужен хотя бы один контакт: phone, email, telegram, github или linkedin' }
+  ({ phone, email, telegram, github, linkedin, links }) =>
+    [phone, email, telegram, github, linkedin].some((contact) => contact !== undefined) ||
+    (links?.length ?? 0) > 0,
+  { error: 'нужен хотя бы один контакт: phone, email, telegram, github, linkedin или links' }
 );
 
 /** Пункт публичного следа: строка или `{ text, url? }`, на выходе всегда `{ text, url? }`. */
