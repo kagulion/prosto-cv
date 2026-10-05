@@ -1,4 +1,5 @@
 import type { Cv } from '../config';
+import { withTrailingSlash } from './links';
 
 type SeoConfig = Cv['seo'];
 
@@ -12,7 +13,9 @@ export const buildRobots = (seo: SeoConfig): string => {
   return [
     'User-agent: *',
     seo?.noindex === true ? 'Disallow: /' : 'Allow: /',
-    ...(url === undefined ? [] : [`Sitemap: ${new URL('sitemap.xml', url).href}`]),
+    ...(url === undefined
+      ? []
+      : [`Sitemap: ${new URL('sitemap.xml', withTrailingSlash(url)).href}`]),
     ''
   ].join('\n');
 };

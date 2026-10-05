@@ -4,3 +4,6 @@ export const displayUrl = (url: string): string =>
     .replace(/^[a-z][a-z0-9+.-]*:\/\//i, '')
     .replace(/^www\./i, '')
     .replace(/\/+$/, '');
+
+/** Адрес сайта как база для относительных путей: без `/` на конце `new URL` отбросит подпапку. */
+export const withTrailingSlash = (url: string): string => (url.endsWith('/') ? url : `${url}/`);

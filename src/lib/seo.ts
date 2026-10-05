@@ -1,6 +1,7 @@
 import type { Cv } from '../config';
 import { splitContacts } from './contact-links';
 import { buildPersonJsonLd, serializeJsonLd } from './json-ld';
+import { withTrailingSlash } from './links';
 import { joinFilled } from './text';
 
 export const OG_IMAGE_PATH = 'og.png';
@@ -29,8 +30,6 @@ export type Seo = {
   /** Уже сериализованная строка, безопасная для `<script>`. */
   readonly jsonLd?: string;
 };
-
-const withTrailingSlash = (url: string): string => (url.endsWith('/') ? url : `${url}/`);
 
 /** `en-US` даёт `en_US`, язык без региона не даёт ничего. */
 const ogLocale = (lang: string): string | undefined => {
