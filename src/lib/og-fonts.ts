@@ -47,7 +47,10 @@ const unwrapWoff = (woff: Buffer): Buffer => {
   let offset = dirSize;
   for (let i = 0; i < tableCount; i++) {
     const entry = 44 + i * 20;
-    const stored = woff.subarray(woff.readUInt32BE(entry + 4), woff.readUInt32BE(entry + 4) + woff.readUInt32BE(entry + 8));
+    const stored = woff.subarray(
+      woff.readUInt32BE(entry + 4),
+      woff.readUInt32BE(entry + 4) + woff.readUInt32BE(entry + 8)
+    );
     const length = woff.readUInt32BE(entry + 12);
     const data = stored.length < length ? inflateSync(stored) : stored;
     const slot = 12 + i * 16;
