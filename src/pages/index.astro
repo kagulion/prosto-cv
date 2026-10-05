@@ -1,5 +1,4 @@
 ---
-import DataToggle from '../dev/DataToggle.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import Nav from '../components/Nav.astro';
@@ -14,10 +13,7 @@ import { buildSections } from '../lib/page-sections';
 import { buildSeo } from '../lib/seo';
 import { SECTION_REGISTRY } from '../sections/registry';
 
-// Dev-only переключатель данных (?data=worst): в сборке ветка вырезается вместе с импортами.
-const dev = import.meta.env.DEV ? await import('../dev/pick-config') : undefined;
-const devMode = dev?.readMode(process.env['CV_DEV_DATA'] ?? null);
-const cv = dev !== undefined && devMode !== undefined ? dev.pickConfig(devMode) : loadConfig();
+const cv = loadConfig();
 const labels = resolveLabels(cv);
 const sections = buildSections(cv, labels, SECTION_REGISTRY);
 const navItems = buildNavItems(sections);
@@ -63,5 +59,4 @@ const footer = buildFooter({
     </main>
   )}
   <Footer {...footer} />
-  {devMode !== undefined && <DataToggle current={devMode} />}
 </Layout>
