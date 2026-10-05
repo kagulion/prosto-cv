@@ -27,6 +27,9 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm format:check
+      - run: pnpm check
       - run: pnpm build
         env:
           BASE_PATH: /${{ github.event.repository.name }}
