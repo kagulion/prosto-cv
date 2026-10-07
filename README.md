@@ -4,7 +4,7 @@
 
 [Пример](https://kagulion.github.io/prosto-cv/)
 
-![Превью сайта ProstoCV](preview.jpg)
+![Превью сайта ProstoCV](preview.webp)
 
 ## Резюме с помощью ИИ-агента
 
